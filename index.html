@@ -3,60 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cổng Ôn Tập Trực Tuyến</title>
+    <title>Cổng Tổng Hợp - Ôn Tập Toán Học</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tùy chỉnh thanh cuộn cho khu vực menu và iframe */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+<body class="bg-gray-100 min-h-screen flex flex-col font-sans text-gray-800">
 
-    <header class="bg-blue-600 text-white text-center p-6 shadow-md">
-        <h1 class="text-3xl font-bold uppercase tracking-wider">Hệ Thống Ôn Tập Đa Trực Tuyến</h1>
-        <p class="text-md mt-2">Chọn lớp và môn học của bạn để bắt đầu thử thách!</p>
+    <header class="bg-white shadow-md border-b-4 border-orange-500 py-4 px-6 flex justify-between items-center">
+        <div class="w-20 md:w-28 hidden sm:block flex-shrink-0">
+            <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo HCMUS" class="w-full h-auto object-contain">
+        </div>
+        
+        <div class="text-center flex-grow px-4">
+            <h2 class="text-lg md:text-xl font-bold text-gray-600 uppercase">HỆ THỐNG ÔN TẬP TỔNG HỢP</h2>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-blue-700 my-1">CHUYÊN ĐỀ TOÁN: TÍNH THỜI GIAN</h1>
+            <p class="text-sm md:text-base text-gray-500 font-medium">Tích hợp tương tác & Chấm điểm tự động</p>
+        </div>
+
+        <div class="w-20 md:w-28 hidden sm:block flex-shrink-0">
+            <img src="https://cdn-icons-png.flaticon.com/512/2941/2941320.png" alt="Math Icon" class="w-16 md:w-20 mx-auto object-contain">
+        </div>
     </header>
 
-    <main class="flex-grow container mx-auto p-6 max-w-5xl mt-8">
+    <main class="flex-grow container mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6 max-w-7xl">
         
-        <div class="mb-10">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-blue-500 pb-2">📚 Khối Lớp 6</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <aside class="w-full lg:w-1/4 xl:w-1/5 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col overflow-hidden max-h-[80vh]">
+            <div class="bg-blue-700 text-white font-bold py-3 px-4 text-center text-lg border-b-2 border-orange-500">
+                Menu Chuyên Đề
+            </div>
+            
+            <nav class="flex flex-col p-2 gap-1 overflow-y-auto">
+                <a href="toan-lop6.html" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
+                    1. Đấu trường Pizza Lớp 6
+                </a>
                 
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-t-4 border-orange-500">
-                    <div class="p-6 text-center">
-                        <div class="text-4xl mb-4">🍕</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Đấu Trường Toán Học</h3>
-                        <p class="text-gray-600 text-sm mb-4">Giành Pizza với các thử thách Số học và Hình học.</p>
-                        <a href="toan-lop6.html" class="inline-block w-full bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 transition">
-                            VÀO THI NGAY
-                        </a>
-                    </div>
-                </div>
+                <a href="#" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
+                    2. Toán Lớp 3 (Đọc đồng hồ)
+                </a>
+                
+                <a href="#" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
+                    3. Toán Lớp 4 (Đổi đơn vị)
+                </a>
+                
+                <a href="#" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
+                    4. Toán Lớp 5 (Quãng đường)
+                </a>
+                
+                <a href="#" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
+                    5. Ôn tập Lý thuyết chung
+                </a>
+            </nav>
+        </aside>
 
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-t-4 border-green-500">
-                    <div class="p-6 text-center">
-                        <div class="text-4xl mb-4">🔬</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Khám Phá Khoa Học</h3>
-                        <p class="text-gray-600 text-sm mb-4">Trạm không gian và các hiện tượng tự nhiên.</p>
-                        <a href="khoa-hoc-lop6.html" class="inline-block w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition">
-                            VÀO THI NGAY
-                        </a>
-                    </div>
-                </div>
-
+        <section class="w-full lg:w-3/4 xl:w-4/5 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col flex-grow min-h-[700px]">
+            <div class="bg-gray-50 px-6 py-3 border-b flex justify-between items-center">
+                <span class="font-bold text-blue-800 text-lg">Nội dung bài học</span>
+                <span class="text-sm bg-orange-100 text-orange-800 px-3 py-1 rounded-full font-medium">Khung hiển thị động</span>
             </div>
-        </div>
-
-        <div class="mb-10">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-purple-500 pb-2">📚 Khối Lớp 7</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                 <div class="bg-gray-200 rounded-lg shadow border border-gray-300 p-6 text-center flex flex-col justify-center h-full">
-                    <p class="text-gray-500 font-bold">Nội dung đang được cập nhật...</p>
-                 </div>
-            </div>
-        </div>
+            
+            <iframe 
+                name="contentFrame" 
+                src="toan-lop6.html" 
+                class="flex-grow w-full h-full border-none rounded-b-lg" 
+                title="Khu vực bài tập">
+            </iframe>
+        </section>
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 text-center p-4 mt-auto">
-        <p class="text-sm">Hệ thống ôn tập nội bộ - Thiết kế dành riêng cho sinh viên và học sinh.</p>
+    <footer class="bg-slate-800 text-gray-300 py-5 mt-auto">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>© Người phát triển web ThS.Đinh Quốc Tuấn - 2026 Khoa Địa Chất - Trường Đại học Khoa học tự nhiên, ĐHQG-HCM</p>
+        </div>
     </footer>
 
 </body>
