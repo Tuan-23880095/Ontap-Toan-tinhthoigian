@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đua Top Giải Toán - Giành Pizza</title>
     <script src="https://cdn.tailwindcss.com"></script> 
-    <title>Hiển thị Toán học bằng MathJax</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        },
-        startup: {
-          typeset: false // Tắt tự động render lúc mới tải trang để tự gọi bằng JS
-        }
-      };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+              typeset: false // Tắt tự động render lúc mới tải trang để tự gọi bằng JS
+            }
+          };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="bg-gray-100 font-sans h-screen flex flex-col">
 
@@ -209,61 +206,27 @@
                     html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4"> <span class="font-bold text-red-700">Sai</span></label>`;
                 }
                 html += `</div>`;
-                container.innerHTML += html;
-                function loadSection(sectionNum) {
-            currentSection = sectionNum;
-            
-            const titles = ["", "PHẦN 1: KHỞI ĐỘNG", "PHẦN 2: VƯỢT CHƯỚNG NGẠI VẬT", "PHẦN 3: GIẢI MÃ HÌNH HỌC"];
-            document.getElementById("section-title").innerText = titles[sectionNum];
-            document.getElementById("display-name").innerText = "Học sinh: " + studentName;
-
-            const container = document.getElementById("questions-container");
-            container.innerHTML = "";
-
-            const startIndex = (sectionNum - 1) * 20;
-            const endIndex = sectionNum * 20;
-
-            for (let i = startIndex; i < endIndex; i++) {
-                if(!questions[i]) break; 
-                let q = questions[i];
-                let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
-                
-                if (q.type === "trac-nghiem") {
-                    q.options.forEach(opt => {
-                        html += `<label class="block mb-2 cursor-pointer hover:bg-orange-100 p-2 rounded transition"><input type="radio" name="q${i}" value="${opt}" class="mr-2 w-4 h-4 text-orange-500"> <span class="text-md">${opt}</span></label>`;
-                    });
-                } else if (q.type === "tra-loi-ngan") {
-                    html += `<input type="text" id="q${i}" class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-orange-500 outline-none font-bold text-blue-700" placeholder="Nhập đáp án của bạn...">`;
-                } else if (q.type === "dung-sai") {
-                    html += `<label class="block mb-2 cursor-pointer hover:bg-green-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Đúng" class="mr-2 w-4 h-4"> <span class="font-bold text-green-700">Đúng</span></label>`;
-                    html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4"> <span class="font-bold text-red-700">Sai</span></label>`;
-                }
-                html += `</div>`;
-                container.innerHTML += html;
-            }
-
-            // --- ĐOẠN CODE THÊM MỚI CHO MATHJAX ---
+                            // --- ĐOẠN CODE THÊM MỚI CHO MATHJAX ---
             // Gọi MathJax render lại các công thức Toán học trong container
-            if (window.MathJax) {
-                MathJax.typesetClear([container]);
-                MathJax.typesetPromise([container]).then(() => {
-                    console.log('Đã render xong công thức toán học!');
-                });
-            }
-            // --------------------------------------
-
-            document.getElementById("lobby-screen").classList.add("hidden");
-            document.getElementById("quiz-screen").classList.remove("hidden");
-            window.scrollTo(0, 0);
-
-            document.getElementById("timer").innerText = "0";
-            startTime = Date.now();
-            timerInterval = setInterval(() => {
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                document.getElementById("timer").innerText = elapsedTime;
-            }, 1000);
-        }
-            }
+                if (window.MathJax) {
+                    MathJax.typesetClear([container]);
+                    MathJax.typesetPromise([container]).then(() => {
+                        console.log('Đã render xong công thức toán học!');
+                    });
+                }
+    // 3. Chuyển đổi màn hình và tính giờ
+                document.getElementById("break-screen").classList.add("hidden");
+                document.getElementById("lobby-screen")?.classList.add("hidden"); // Thêm dấu ? phòng hờ lỗi Sảnh
+                document.getElementById("quiz-screen").classList.remove("hidden");
+                window.scrollTo(0, 0);
+    
+                document.getElementById("timer").innerText = "0";
+                startTime = Date.now();
+                timerInterval = setInterval(() => {
+                    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                    document.getElementById("timer").innerText = elapsedTime;
+                }, 1000);
+            }            
 
             // Chuyển màn hình và cuộn lên top
             document.getElementById("break-screen").classList.add("hidden");
@@ -273,6 +236,8 @@
             // Reset và Bắt đầu đếm giờ cho phần này
             document.getElementById("timer").innerText = "0";
             startTime = Date.now();
+// Xóa bộ đếm cũ nếu có trước khi tạo bộ đếm mới
+            if(timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
                 document.getElementById("timer").innerText = elapsedTime;
