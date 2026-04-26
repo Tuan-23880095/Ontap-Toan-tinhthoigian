@@ -175,23 +175,22 @@
         }
 
         function loadSection(sectionNum) {
-            // Cập nhật Tiêu đề
+            // 1. Cập nhật Tiêu đề
             document.getElementById("section-title").innerText = `PHẦN ${sectionNum}: ${sectionNum === 1 ? 'KHỞI ĐỘNG' : (sectionNum === 2 ? 'VƯỢT CHƯỚNG NGẠI VẬT' : 'GIẢI MÃ HÌNH HỌC')}`;
             document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
-
+        
             const container = document.getElementById("questions-container");
-            container.innerHTML = "";
-
-            // Lấy ra 20 câu hỏi tương ứng với từng phần
-            // Phần 1: index 0 -> 19
-            // Phần 2: index 20 -> 39
-            // Phần 3: index 40 -> 59
+            container.innerHTML = ""; // Xóa dữ liệu cũ
+        
             const startIndex = (sectionNum - 1) * 20;
             const endIndex = sectionNum * 20;
-
+        
+            let allHtml = ""; // Biến để tích luỹ toàn bộ HTML của 20 câu hỏi
+        
+            // 2. Vòng lặp chỉ dùng để tạo HTML câu hỏi
             for (let i = startIndex; i < endIndex; i++) {
                 if(!questions[i]) break; // Phòng hờ nếu mảng không đủ 60 câu
-
+        
                 let q = questions[i];
                 let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
                 
@@ -206,38 +205,32 @@
                     html += `<label class="block mb-2 cursor-pointer hover:bg-red-100 p-2 rounded transition"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4"> <span class="font-bold text-red-700">Sai</span></label>`;
                 }
                 html += `</div>`;
-                            // --- ĐOẠN CODE THÊM MỚI CHO MATHJAX ---
-            // Gọi MathJax render lại các công thức Toán học trong container
-                if (window.MathJax) {
-                    MathJax.typesetClear([container]);
-                    MathJax.typesetPromise([container]).then(() => {
-                        console.log('Đã render xong công thức toán học!');
-                    });
-                }
-    // 3. Chuyển đổi màn hình và tính giờ
-                document.getElementById("break-screen").classList.add("hidden");
-                document.getElementById("lobby-screen")?.classList.add("hidden"); // Thêm dấu ? phòng hờ lỗi Sảnh
-                document.getElementById("quiz-screen").classList.remove("hidden");
-                window.scrollTo(0, 0);
-    
-                document.getElementById("timer").innerText = "0";
-                startTime = Date.now();
-                timerInterval = setInterval(() => {
-                    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                    document.getElementById("timer").innerText = elapsedTime;
-                }, 1000);
+                
+                allHtml += html; // Gộp HTML của câu hỏi này vào biến tổng
             }            
-
-            // Chuyển màn hình và cuộn lên top
+        
+            // 3. Đổ toàn bộ HTML vào DOM (chỉ 1 lần duy nhất)
+            container.innerHTML = allHtml;
+        
+            // 4. Gọi MathJax render SAU KHI HTML đã nằm trong DOM
+            if (window.MathJax) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]).then(() => {
+                    console.log('Đã render xong công thức toán học!');
+                });
+            }
+        
+            // 5. Chuyển đổi màn hình
             document.getElementById("break-screen").classList.add("hidden");
+            document.getElementById("lobby-screen")?.classList.add("hidden"); 
             document.getElementById("quiz-screen").classList.remove("hidden");
             window.scrollTo(0, 0);
-
-            // Reset và Bắt đầu đếm giờ cho phần này
+        
+            // 6. Xử lý Timer đếm giờ
+            if(timerInterval) clearInterval(timerInterval); // Xóa bộ đếm cũ nếu có
             document.getElementById("timer").innerText = "0";
             startTime = Date.now();
-// Xóa bộ đếm cũ nếu có trước khi tạo bộ đếm mới
-            if(timerInterval) clearInterval(timerInterval);
+            
             timerInterval = setInterval(() => {
                 const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
                 document.getElementById("timer").innerText = elapsedTime;
