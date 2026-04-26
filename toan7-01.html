@@ -83,10 +83,6 @@
     <script>
         const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
 
-        // =======================================================
-        // DÁN TOÀN BỘ 60 CÂU HỎI VÀO ĐÂY (Giữ nguyên cấu trúc)
-        // Lưu ý: Đảm bảo có chính xác 60 items trong mảng này!
-        // =======================================================
         const questions = [
           {"type": "trac-nghiem", "question": "Câu 1: Tìm x trong tỉ lệ thức $\\frac{x}{8} = \\frac{9}{3}$:", "options": ["48", "22", "25", "24"], "correct": "24"},
           {"type": "trac-nghiem", "question": "Câu 2: Tìm x trong tỉ lệ thức $\\frac{x}{6} = \\frac{15}{5}$:", "options": ["36", "18", "19", "16"], "correct": "18"},
@@ -178,19 +174,19 @@
             // 1. Cập nhật Tiêu đề
             document.getElementById("section-title").innerText = `PHẦN ${sectionNum}: ${sectionNum === 1 ? 'KHỞI ĐỘNG' : (sectionNum === 2 ? 'VƯỢT CHƯỚNG NGẠI VẬT' : 'GIẢI MÃ HÌNH HỌC')}`;
             document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
-        
+
             const container = document.getElementById("questions-container");
             container.innerHTML = ""; // Xóa dữ liệu cũ
-        
+
             const startIndex = (sectionNum - 1) * 20;
             const endIndex = sectionNum * 20;
-        
+
             let allHtml = ""; // Biến để tích luỹ toàn bộ HTML của 20 câu hỏi
-        
+
             // 2. Vòng lặp chỉ dùng để tạo HTML câu hỏi
             for (let i = startIndex; i < endIndex; i++) {
                 if(!questions[i]) break; // Phòng hờ nếu mảng không đủ 60 câu
-        
+
                 let q = questions[i];
                 let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-lg text-gray-800">${q.question}</p>`;
                 
@@ -208,10 +204,10 @@
                 
                 allHtml += html; // Gộp HTML của câu hỏi này vào biến tổng
             }            
-        
+
             // 3. Đổ toàn bộ HTML vào DOM (chỉ 1 lần duy nhất)
             container.innerHTML = allHtml;
-        
+
             // 4. Gọi MathJax render SAU KHI HTML đã nằm trong DOM
             if (window.MathJax) {
                 MathJax.typesetClear([container]);
@@ -219,13 +215,13 @@
                     console.log('Đã render xong công thức toán học!');
                 });
             }
-        
+
             // 5. Chuyển đổi màn hình
             document.getElementById("break-screen").classList.add("hidden");
             document.getElementById("lobby-screen")?.classList.add("hidden"); 
             document.getElementById("quiz-screen").classList.remove("hidden");
             window.scrollTo(0, 0);
-        
+
             // 6. Xử lý Timer đếm giờ
             if(timerInterval) clearInterval(timerInterval); // Xóa bộ đếm cũ nếu có
             document.getElementById("timer").innerText = "0";
