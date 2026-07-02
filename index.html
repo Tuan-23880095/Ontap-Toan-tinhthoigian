@@ -3,78 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cổng Tổng Hợp - Ôn Tập Toán Học</title>
+    <title>Hệ Thống Học Tập Trực Tuyến - E-Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Tùy chỉnh thanh cuộn cho khu vực menu và iframe */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col font-sans text-gray-800">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-    <header class="bg-white shadow-md border-b-4 border-orange-500 py-4 px-6 flex justify-between items-center">
-        <div class="w-20 md:w-28 hidden sm:block flex-shrink-0">
-            <img src="https://hcmus.edu.vn/wp-content/uploads/2023/04/Logo-chinh-e1681638380305.png" alt="Logo HCMUS" class="w-full h-auto object-contain">
-        </div>
-        
-        <div class="text-center flex-grow px-4">
-            <h2 class="text-lg md:text-xl font-bold text-gray-600 uppercase">HỆ THỐNG ÔN TẬP TỔNG HỢP</h2>
-            <h1 class="text-2xl md:text-3xl font-extrabold text-blue-700 my-1">CHUYÊN ĐỀ TOÁN: TÍNH THỜI GIAN</h1>
-            <p class="text-sm md:text-base text-gray-500 font-medium">Tích hợp tương tác & Chấm điểm tự động</p>
-        </div>
-
-        <div class="w-20 md:w-28 hidden sm:block flex-shrink-0">
-            <img src="https://cdn-icons-png.flaticon.com/512/2941/2941320.png" alt="Math Icon" class="w-16 md:w-20 mx-auto object-contain">
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-amber-500 p-2 rounded-lg text-xl">🎓</div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wide uppercase text-amber-400">E-Academy</h1>
+                    <p class="text-xs text-slate-400">Học Chủ Động - Bứt Phá Điểm Số</p>
+                </div>
+            </div>
+            <span class="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300 font-medium">Hệ Thống Giảng Dạy 2026</span>
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-6 flex flex-col lg:flex-row gap-6 max-w-7xl">
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 md:p-8 text-white mb-8 shadow-lg relative overflow-hidden">
+            <div class="relative z-10 max-w-2xl">
+                <span class="bg-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-indigo-500/20">Bảng điều khiển học sinh</span>
+                <h2 class="text-2xl md:text-3xl font-extrabold mt-3 mb-2">Chào mừng bạn đến với Không Gian Học Tập Lớp Chất Lượng Cao</h2>
+                <p class="text-slate-300 text-sm">Vui lòng chọn khối lớp đang theo học, sau đó chọn đúng buổi học tương ứng để vào phòng học lý thuyết, làm bài tập và tham gia Đấu trường Pizza.</p>
+            </div>
+            <div class="absolute right-0 bottom-0 top-0 opacity-10 text-[10rem] select-none pointer-events-none flex items-center pr-10">📐</div>
+        </div>
+
+        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center"><span class="w-1 h-6 bg-indigo-600 rounded mr-2"></span>Chương trình học các khối lớp</h3>
         
-        <aside class="w-full lg:w-1/4 xl:w-1/5 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col overflow-hidden max-h-[80vh]">
-            <div class="bg-blue-700 text-white font-bold py-3 px-4 text-center text-lg border-b-2 border-orange-500">
-                Menu Chuyên Đề
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <nav class="flex flex-col p-2 gap-1 overflow-y-auto">
-                <a href="toan7-01.html" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
-                    1. Toán Lớp 7 ck
-                </a>
-                
-                <a href="toan6-03-nhanchia.html" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
-                    2. Toán Lớp 6
-                </a>
-                
-                <a href="toan7-04-luythuyet.html" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
-                    7-4A. Toán Lớp 7 Buổi 4 lý thuyết
-                </a>
-                
-                <a href="toan7-04-baitap.html" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
-                    7-4B. Toán Lớp 7 Buổi 4 bài tập
-                </a>
-                
-                <a href="toan7-04-tracnghiem.html" target="contentFrame" class="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-orange-100 hover:text-orange-700 border-l-4 border-transparent hover:border-orange-500 rounded transition font-medium text-gray-700">
-                    7-4C. Toán lớp 7 Buổi 4 trắc nghiệm
-                </a>
-            </nav>
-        </aside>
-
-        <section class="w-full lg:w-3/4 xl:w-4/5 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col flex-grow min-h-[700px]">
-            <div class="bg-gray-50 px-6 py-3 border-b flex justify-between items-center">
-                <span class="font-bold text-blue-800 text-lg">Nội dung bài học</span>
-                <span class="text-sm bg-orange-100 text-orange-800 px-3 py-1 rounded-full font-medium">Khung hiển thị động</span>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <div class="flex items-center space-x-3 mb-4 border-b pb-3">
+                    <span class="text-2xl bg-blue-50 p-2 rounded-lg text-blue-600">🧮</span>
+                    <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Toán Học 6</h4>
+                </div>
+                <div class="space-y-2">
+                    <a href="toan6-01.html" class="flex justify-between items-center p-3 rounded-lg border border-slate-100 hover:border-blue-500 hover:bg-blue-50/30 transition text-sm font-medium">
+                        <span>Buổi 1: Tập hợp các số tự nhiên</span>
+                        <span class="text-xs text-blue-600">Vào học &rarr;</span>
+                    </a>
+                    <a href="toan6-02.html" class="flex justify-between items-center p-3 rounded-lg border border-slate-100 hover:border-blue-500 hover:bg-blue-50/30 transition text-sm font-medium">
+                        <span>Buổi 2: Các phép tính lũy thừa</span>
+                        <span class="text-xs text-blue-600">Vào học &rarr;</span>
+                    </a>
+                </div>
             </div>
-            
-        </section>
 
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <div class="flex items-center space-x-3 mb-4 border-b pb-3">
+                    <span class="text-2xl bg-emerald-50 p-2 rounded-lg text-emerald-600">🧪</span>
+                    <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Khoa Học Tự Nhiên 6</h4>
+                </div>
+                <div class="space-y-2">
+                    <a href="khtn6-01.html" class="flex justify-between items-center p-3 rounded-lg border border-slate-100 hover:border-emerald-500 hover:bg-emerald-50/30 transition text-sm font-medium">
+                        <span>Buổi 1: Giới thiệu về các dụng cụ đo thể tích</span>
+                        <span class="text-xs text-emerald-600">Vào học &rarr;</span>
+                    </a>
+                </div>
+            </div>
+// Bắt đầu 1 khối lớp
+            <div class="bg-white rounded-xl shadow-sm border border-indigo-200 p-6 ring-2 ring-indigo-600/5">
+                <div class="flex justify-between items-center mb-4 border-b pb-3">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl bg-indigo-50 p-2 rounded-lg text-indigo-600">🍕</span>
+                        <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Toán Học 7</h4>
+                    </div>
+                    <span class="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">ĐANG HOẠT ĐỘNG</span>
+                </div>
+
+                //bắt đầu 1 buổi
+                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
+                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
+                        <span>🗓️ Buổi 4:  Thứ tự thực hiện phép tính, quy tắc dấu ngoặc và quy tắc chuyển vế </span>
+                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
+                    </div>
+                    
+                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
+                        <a href="toan7-04-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
+                            <span class="flex items-center">
+                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
+                                📘 Phần A: Bài học lý thuyết trọng tâm
+                            </span>
+                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
+                        </a>
+                
+                        <a href="toan7-04-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
+                            <span class="flex items-center">
+                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
+                                ✍️ Phần B: Phiếu bài tập tự luyện
+                            </span>
+                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
+                        </a>
+                
+                        <a href="toan7-04-tracnghiem.html" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
+                            <span class="flex items-center">
+                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
+                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
+                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
+                            </span>
+                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
+                        </a>
+                    </div>
+                </div>
+                //Kết thúc 1 buổi
+            </div>
+            // kết thúc khối lớp buổi
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <div class="flex items-center space-x-3 mb-4 border-b pb-3">
+                    <span class="text-2xl bg-purple-50 p-2 rounded-lg text-purple-600">📐</span>
+                    <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Toán Học 10</h4>
+                </div>
+                <div class="space-y-2">
+                    <a href="toan10-01.html" class="flex justify-between items-center p-3 rounded-lg border border-slate-100 hover:border-purple-500 hover:bg-purple-50/30 transition text-sm font-medium">
+                        <span>Buổi 1: Mệnh đề toán học & Tập hợp</span>
+                        <span class="text-xs text-purple-600">Vào học &rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </main>
 
-    <footer class="bg-slate-800 text-gray-300 py-5 mt-auto">
-        <div class="container mx-auto px-4 text-center text-sm">
-            <p>© Người phát triển web ThS.Đinh Quốc Tuấn - 2026 Khoa Địa Chất - Trường Đại học Khoa học tự nhiên, ĐHQG-HCM</p>
-        </div>
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+        <p>&copy; 2026 Hệ thống quản lý học tập trực tuyến E-Academy. Bảo lưu mọi quyền.</p>
     </footer>
 
 </body>
