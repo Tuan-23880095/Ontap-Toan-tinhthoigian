@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh Giá Năng Lực KHTN 6 - Chuyên Đề Sinh Học</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&family=Roboto:wght=400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Thiết lập chung: Nền trắng, chữ đen chính */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        /* Tiêu đề chính rực rỡ */
+        .header-title {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            color: #0284c7; /* Xanh dương sáng */
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* Khung thông tin học sinh điền */
+        .student-info {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần lớn */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 35px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .section-title.answer-key {
+            background: linear-gradient(135deg, #10b981, #059669); /* Màu xanh lá cho đáp án */
+        }
+
+        .guide-text {
+            font-style: italic;
+            color: #64748b;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Định dạng câu hỏi */
+        .question-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        /* Grid hiển thị 4 lựa chọn A, B, C, D */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding-left: 15px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: baseline;
+        }
+
+        /* Định dạng Trắc nghiệm Đúng / Sắp xếp hộp ô chọn */
+        .tf-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 10px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .tf-options {
+            display: flex;
+            gap: 20px;
+        }
+
+        .tf-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .box-check {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            background-color: #f8fafc;
+            display: inline-block;
+        }
+
+        /* Định dạng bảng đáp án */
+        .answer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .answer-table th {
+            background-color: #f1f5f9;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+
+        .answer-table td strong {
+            color: #0284c7;
+        }
+
+        /* Nhấn mạnh phần khuyết điểm điền */
+        .fill-blank {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        @media print {
+            body { padding: 0; }
+            .worksheet-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    
+    <div class="header-title">🎯 PHIẾU ĐÁNH GIÁ NĂNG LỰC KHTN 6 - BUỔI 4</div>
+    <div class="subtitle">Chuyên đề: Vi Khuẩn, Virus, Nguyên Sinh Vật và Giới Nấm (21 Câu hỏi)</div>
+
+    <div class="student-info">
+        <div>Họ và tên học sinh: ........................................................</div>
+        <div>Lớp: ..................</div>
+    </div>
+
+    <div class="section-title">PHẦN 1: TRẮC NGHIỆM NHIỀU LỰA CHỌN (7 CÂU)</div>
+    <div class="guide-text">Hướng dẫn: Khoanh tròn vào chữ cái đứng trước đáp án đúng nhất.</div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 1:</strong> Đặc điểm nào dưới đây là đặc điểm chung của giới Nấm?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Là sinh vật nhân sơ, sống tự dưỡng.</div>
+            <div class="option-item">B. Tế bào có chứa lục lạp để quang hợp.</div>
+            <div class="option-item">C. Là sinh vật nhân thực, sống dị dưỡng.</div>
+            <div class="option-item">D. Không có thành tế bào.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 2:</strong> Trong các loại nấm sau, đại diện nào có cấu tạo cơ thể đơn bào?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Nấm rơm.</div>
+            <div class="option-item">B. Nấm men.</div>
+            <div class="option-item">C. Nấm hương.</div>
+            <div class="option-item">D. Nấm mộc nhĩ.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 3:</strong> Thành phần cấu tạo nào sau đây thường có ở nấm độc mà <strong>KHÔNG CÓ</strong> ở nấm ăn được?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Mũ nấm và phiến nấm.</div>
+            <div class="option-item">B. Cuống nấm và sợi nấm.</div>
+            <div class="option-item">C. Vòng cuống nấm và bao gốc nấm.</div>
+            <div class="option-item">D. Thể quả và sợi nấm.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 4:</strong> Tế bào vi khuẩn khác với tế bào nhân thực ở điểm cơ bản nào?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Vi khuẩn chưa có màng nhân bao bọc vật chất di truyền (nhân sơ).</div>
+            <div class="option-item">B. Vi khuẩn có kích thước lớn hơn tế bào nhân thực.</div>
+            <div class="option-item">C. Vi khuẩn không có màng tế bào.</div>
+            <div class="option-item">D. Vi khuẩn có chứa lục lạp.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 5:</strong> Nguyên sinh vật nào dưới đây có khả năng tự quang hợp do có chứa lục lạp?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Trùng giày.</div>
+            <div class="option-item">B. Trùng biến hình.</div>
+            <div class="option-item">C. Tảo lục đơn bào.</div>
+            <div class="option-item">D. Trùng kiết lị.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 6:</strong> Vì sao Virus không được coi là một sinh vật hoàn chỉnh?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Vì chúng có kích thước quá nhỏ bé.</div>
+            <div class="option-item">B. Vì chúng chưa có cấu tạo tế bào, phải sống kí sinh nội bào bắt buộc.</div>
+            <div class="option-item">C. Vì chúng luôn gây bệnh cho con người.</div>
+            <div class="option-item">D. Vì vật chất di truyền của chúng chỉ có ARN.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 7:</strong> Bệnh nào dưới đây là do nấm gây ra ở người?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Bệnh sốt rét.</div>
+            <div class="option-item">B. Bệnh kiết lị.</div>
+            <div class="option-item">C. Bệnh hắc lào, lang ben.</div>
+            <div class="option-item">D. Bệnh lao phổi.</div>
+        </div>
+    </div>
+
+    <div class="section-title">PHẦN 2: TRẮC NGHIỆM ĐÚNG/SAI (7 CÂU)</div>
+    <div class="guide-text">Hướng dẫn: Đánh dấu [X] hoặc điền vào ô trống Đúng hoặc Sai cho các phát biểu sau.</div>
+
+    <div class="tf-container">
+        <span><strong>Câu 8:</strong> Nấm là sinh vật có khả năng tự dưỡng vì chúng có thể tự tổng hợp chất hữu cơ nhờ ánh sáng mặt trời.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 9:</strong> Nấm đảm là nhóm nấm có cơ quan sinh sản là đảm bào tử, ví dụ như nấm rơm, nấm hương.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 10:</strong> Đa số nguyên sinh vật là cơ thể đơn bào, nhân thực và có kích thước hiển vi.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 11:</strong> Bào tử nấm mốc rất nhẹ, dễ dàng phát tán trong không khí và có thể gây dị ứng đường hô hấp.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 12:</strong> Virus có cấu tạo tế bào nhân sơ giống như vi khuẩn.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 13:</strong> Trong tự nhiên, vi khuẩn và nấm hoại sinh đóng vai trò quan trọng trong việc phân hủy xác sinh vật và chất thải hữu cơ, làm sạch môi trường.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 14:</strong> Nấm men được ứng dụng rộng rãi trong công nghiệp chế biến thực phẩm như sản xuất bánh mì, ủ bia, rượu vang.</span>
+        <div class="tf-options">
+            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
+            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
+        </div>
+    </div>
+
+    <div class="section-title">PHẦN 3: TRẮC NGHIỆM ĐIỀN KHUYẾT (7 CÂU)</div>
+    <div class="guide-text">Hướng dẫn: Chọn các từ/cụm từ thích hợp nhất điền vào chỗ trống để hoàn thành các câu sau.</div>
+
+    <div class="question-block">
+        <strong>Câu 15:</strong> Nấm là những sinh vật nhân thực, cơ thể có thể là đơn bào hoặc đa bào, có lối sống ............................................ (lấy thức ăn là các chất hữu cơ có sẵn).
+    </div>
+    <div class="question-block">
+        <strong>Câu 16:</strong> Khác với thực vật, thành tế bào của nấm được cấu tạo chủ yếu bằng chất .............................................
+    </div>
+    <div class="question-block">
+        <strong>Câu 17:</strong> Vi khuẩn là nhóm sinh vật có cấu tạo tế bào ............................................, kích thước hiển vi.
+    </div>
+    <div class="question-block">
+        <strong>Câu 18:</strong> Virus chưa có cấu tạo tế bào, chúng sống ............................................ bắt buộc trong tế bào vật chủ.
+    </div>
+    <div class="question-block">
+        <strong>Câu 19:</strong> Tảo lục thuộc giới Nguyên sinh có khả năng tự dưỡng (quang hợp) nhờ trong tế bào của chúng có chứa .............................................
+    </div>
+    <div class="question-block">
+        <strong>Câu 20:</strong> Đa số các loại nấm trong tự nhiên sinh sản chủ yếu bằng .............................................
+    </div>
+    <div class="question-block">
+        <strong>Câu 21:</strong> Nấm độc thường có màu sắc sặc sỡ và có thêm 2 bộ phận đặc trưng mà nấm ăn thường không có, đó là vòng cuống nấm và .............................................
+    </div>
+
+    <div class="section-title answer-key">🔑 ĐÁP ÁN (DÀNH CHO GIÁO VIÊN)</div>
+    <p class="guide-text">Tài liệu đáp án chính thức bám sát chương trình bài học phục vụ công tác chấm và chữa bài.</p>
+
+    <h3>Phần 1: Trắc nghiệm nhiều lựa chọn</h3>
+    <table class="answer-table">
+        <thead>
+            <tr>
+                <th style="width: 20%">Câu hỏi</th>
+                <th style="width: 25%">Đáp án đúng</th>
+                <th>Ghi chú / Kiến thức cốt lõi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Câu 1</strong></td><td><strong>C</strong></td><td>Nấm là sinh vật nhân thực và dị dưỡng (do không có lục lạp).</td>
+            </tr>
+            <tr><td><strong>Câu 2</strong></td><td><strong>B</strong></td><td>Nấm men có cấu tạo đơn bào; các dòng nấm khác trong đáp án là đa bào.</td>
+            </tr>
+            <tr><td><strong>Câu 3</strong></td><td><strong>C</strong></td><td>Vòng cuống nấm và bao gốc nấm là dấu hiệu nhận biết nấm độc điển hình.</td>
+            </tr>
+            <tr><td><strong>Câu 4</strong></td><td><strong>A</strong></td><td>Vi khuẩn thuộc nhóm sinh vật nhân sơ (chưa có màng nhân hoàn chỉnh).</td>
+            </tr>
+            <tr><td><strong>Câu 5</strong></td><td><strong>C</strong></td><td>Tảo lục chứa cấu trúc bào quan lục lạp giúp thực hiện quá trình quang hợp.</td>
+            </tr>
+            <tr><td><strong>Câu 6</strong></td><td><strong>B</strong></td><td>Virus chỉ là dạng sống chứa vật chất di truyền và lớp vỏ protein (chưa có cấu tạo tế bào).</td>
+            </tr>
+            <tr><td><strong>Câu 7</strong></td><td><strong>C</strong></td><td>Hắc lào, lang ben là các bệnh da liễu phổ biến do nấm sợi kí sinh gây ra.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Phần 2: Trắc nghiệm Đúng/Sai</h3>
+    <table class="answer-table">
+        <thead>
+            <tr>
+                <th style="width: 20%">Câu hỏi</th>
+                <th style="width: 25%">Kết quả</th>
+                <th>Phân tích ngắn gọn lý do</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Câu 8</strong></td><td><strong style="color: #dc2626;">Sai</strong></td><td>Nấm hoàn toàn không có lục lạp nên phải sống dị dưỡng (hoại sinh/kí sinh).</td></tr>
+            <tr><td><strong>Câu 9</strong></td><td><strong>Đúng</strong></td><td>Nấm rơm và nấm hương sinh sản bằng đảm bào tử, thuộc nhóm nấm đảm.</td></tr>
+            <tr><td><strong>Câu 10</strong></td><td><strong>Đúng</strong></td><td>Đúng đặc điểm phân loại cơ bản của giới Nguyên sinh vật.</td></tr>
+            <tr><td><strong>Câu 11</strong></td><td><strong>Đúng</strong></td><td>Bào tử nấm mốc lơ lửng rất dễ hít phải, có thể kích ứng hệ hô hấp.</td></tr>
+            <tr><td><strong>Câu 12</strong></td><td><strong style="color: #dc2626;">Sai</strong></td><td>Virus chưa có cấu tạo tế bào (chỉ là hạt virus), cấu trúc đơn giản hơn vi khuẩn.</td></tr>
+            <tr><td><strong>Câu 13</strong></td><td><strong>Đúng</strong></td><td>Đóng vai trò là sinh vật phân hủy chủ chốt trong các hệ sinh thái tự nhiên.</td></tr>
+            <tr><td><strong>Câu 14</strong></td><td><strong>Đúng</strong></td><td>Nấm men thực hiện lên men đường tạo CO₂ và alcohol ứng dụng làm bánh, rượu.</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Phần 3: Trắc nghiệm Điền khuyết</h3>
+    <table class="answer-table">
+        <thead>
+            <tr>
+                <th style="width: 20%">Câu hỏi</th>
+                <th>Từ khóa / Cụm từ chính xác cần điền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Câu 15</strong></td><td><span class="fill-blank">dị dưỡng</span></td></tr>
+            <tr><td><strong>Câu 16</strong></td><td><span class="fill-blank">kitin</span> (hoặc chitin)</td></tr>
+            <tr><td><strong>Câu 17</strong></td><td><span class="fill-blank">nhân sơ</span></td></tr>
+            <tr><td><strong>Câu 18</strong></td><td><span class="fill-blank">kí sinh nội bào</span></td></tr>
+            <tr><td><strong>Câu 19</strong></td><td><span class="fill-blank">lục lạp</span></td></tr>
+            <tr><td><strong>Câu 20</strong></td><td><span class="fill-blank">bào tử</span></td></tr>
+            <tr><td><strong>Câu 21</strong></td><td><span class="fill-blank">bao gốc nấm</span> (hoặc bao gốc)</td></tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
