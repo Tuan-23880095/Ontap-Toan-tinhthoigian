@@ -3,423 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đánh Giá Năng Lực KHTN 6 - Chuyên Đề Sinh Học</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&family=Roboto:wght=400;500&display=swap" rel="stylesheet">
-    
+    <title>Đua Top KHTN 6 - Giành Pizza</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
     <script>
-        window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+          window.MathJax = {
+            tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+              typeset: false // Tắt tự động render lúc mới tải trang để tự gọi bằng JS
+            }
+          };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="bg-gray-100 font-sans h-screen flex flex-col">
 
-    <style>
-        /* Thiết lập chung: Nền trắng, chữ đen chính */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
-            line-height: 1.8;
-            margin: 0;
-            padding: 10px;
+    <header class="bg-emerald-600 text-white text-center p-4 shadow-md">
+        <h1 class="text-2xl font-bold">🍕 ĐẤU TRƯỜNG KHTN 6 - MỤC TIÊU PIZZA 🍕</h1>
+        <p class="text-sm">Chuyên đề Sinh học: Tế bào, Vi khuẩn, Virus, Nguyên sinh vật & Nấm</p>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4 max-w-3xl">
+        
+        <div id="login-screen" class="bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-xl font-bold mb-4">Nhập tên để bắt đầu cuộc đua</h2>
+            <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" class="w-full p-3 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <button onclick="startQuiz()" class="bg-emerald-600 text-white font-bold py-3 px-6 rounded hover:bg-emerald-700 transition duration-300 w-full">
+                VÀO PHẦN 1 VÀ TÍNH GIỜ
+            </button>
+        </div>
+
+        <div id="quiz-screen" class="hidden bg-white p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <div>
+                    <span class="font-bold text-lg block text-gray-700" id="display-name"></span>
+                    <span class="font-bold text-2xl text-emerald-600" id="section-title">PHẦN 1: KHỞI ĐỘNG</span>
+                </div>
+                <div class="text-right">
+                    <span class="font-bold text-red-500 text-2xl">⏱ <span id="timer">0</span>s</span>
+                </div>
+            </div>
+            
+            <div id="questions-container" class="space-y-6 mt-4">
+                </div>
+
+            <button onclick="submitSection()" class="mt-8 bg-green-500 text-white font-bold py-3 px-6 rounded hover:bg-green-600 transition duration-300 w-full text-lg">
+                NỘP BÀI <span id="btn-submit-text">PHẦN 1</span>
+            </button>
+        </div>
+
+        <div id="break-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-2xl font-bold mb-4 text-blue-600" id="break-title">Hoàn thành Phần 1!</h2>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
+                <p class="text-lg">Điểm phần này: <span id="section-score" class="font-bold text-xl text-green-600"></span>/70</p>
+                <p class="text-lg">Thời gian chặng: <span id="section-time" class="font-bold text-xl text-red-500"></span> giây</p>
+            </div>
+            <button onclick="nextSection()" class="bg-emerald-600 text-white font-bold py-3 px-6 rounded hover:bg-emerald-700 transition duration-300 w-full text-lg shadow-md">
+                TIẾP TỤC CHIẾN ĐẤU 🚀
+            </button>
+        </div>
+
+        <div id="result-screen" class="hidden bg-white p-6 rounded-lg shadow-lg text-center mt-10 border-t-8 border-emerald-600">
+            <h2 class="text-3xl font-bold mb-4 text-green-600">🎉 ĐÃ HOÀN THÀNH 3 CHẶNG KHTN 6! 🎉</h2>
+            <div class="bg-gray-100 p-4 rounded mb-6 text-left inline-block w-full max-w-sm">
+                <p class="mb-2">🔹 Điểm Phần 1 (Lựa chọn): <span id="res-p1" class="font-bold"></span></p>
+                <p class="mb-2">🔹 Điểm Phần 2 (Đúng/Sai): <span id="res-p2" class="font-bold"></span></p>
+                <p class="mb-2 border-b pb-2">🔹 Điểm Phần 3 (Điền khuyết): <span id="res-p3" class="font-bold"></span></p>
+                <p class="text-xl mt-2 text-emerald-700">🏆 TỔNG ĐIỂM: <span id="final-score" class="font-bold text-2xl"></span>/210</p>
+                <p class="text-xl mt-2 text-red-600">⏱ TỔNG THỜI GIAN: <span id="final-time" class="font-bold text-2xl"></span>s</p>
+            </div>
+            
+            <p class="text-md font-bold text-gray-700 mb-4" id="status-msg">Đang khóa dữ liệu và đồng bộ lên hệ thống bảng xếp hạng...</p>
+        </div>
+
+    </main>
+
+    <script>
+        // Đường dẫn Google Apps Script để lưu điểm tự động
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
+
+        // Cơ sở dữ liệu 21 câu hỏi chia đều 3 phần (Mỗi phần đúng 7 câu)
+        const questions = [
+          // PHẦN 1: TRẮC NGHIỆM NHIỀU LỰA CHỌN (0 - 6)
+          {"type": "trac-nghiem", "question": "Câu 1: Đặc điểm nào dưới đây là đặc điểm chung của giới Nấm?", "options": ["Là sinh vật nhân sơ, sống tự dưỡng.", "Tế bào có chứa lục lạp để quang hợp.", "Là sinh vật nhân thực, sống dị dưỡng.", "Không có thành tế bào."], "correct": "Là sinh vật nhân thực, sống dị dưỡng."},
+          {"type": "trac-nghiem", "question": "Câu 2: Trong các loại nấm sau, đại diện nào có cấu tạo cơ thể đơn bào?", "options": ["Nấm rơm.", "Nấm men.", "Nấm hương.", "Nấm mộc nhĩ."], "correct": "Nấm men."},
+          {"type": "trac-nghiem", "question": "Câu 3: Thành phần cấu tạo nào sau đây thường có ở nấm độc mà KHÔNG CÓ ở nấm ăn được?", "options": ["Mũ nấm và phiến nấm.", "Cuống nấm và sợi nấm.", "Vòng cuống nấm và bao gốc nấm.", "Thể quả và sợi nấm."], "correct": "Vòng cuống nấm và bao gốc nấm."},
+          {"type": "trac-nghiem", "question": "Câu 4: Tế bào vi khuẩn khác với tế bào nhân thực ở điểm cơ bản nào?", "options": ["Vi khuẩn chưa có màng nhân bao bọc vật chất di truyền (nhân sơ).", "Vi khuẩn có kích thước lớn hơn tế bào nhân thực.", "Vi khuẩn không có màng tế bào.", "Vi khuẩn có chứa lục lạp."], "correct": "Vi khuẩn chưa có màng nhân bao bọc vật chất di truyền (nhân sơ)."},
+          {"type": "trac-nghiem", "question": "Câu 5: Nguyên sinh vật nào dưới đây có khả năng tự quang hợp do có chứa lục lạp?", "options": ["Trùng giày.", "Trùng biến hình.", "Tảo lục đơn bào.", "Trùng kiết lị."], "correct": "Tảo lục đơn bào."},
+          {"type": "trac-nghiem", "question": "Câu 6: Vì sao Virus không được coi là một sinh vật hoàn chỉnh?", "options": ["Vì chúng có kích thước quá nhỏ bé.", "Vì chúng chưa có cấu tạo tế bào, phải sống kí sinh nội bào bắt buộc.", "Vì chúng luôn gây bệnh cho con người.", "Vì vật chất di truyền của chúng chỉ có ARN."], "correct": "Vì chúng chưa có cấu tạo tế bào, phải sống kí sinh nội bào bắt buộc."},
+          {"type": "trac-nghiem", "question": "Câu 7: Bệnh nào dưới đây là do nấm gây ra ở người?", "options": ["Bệnh sốt rét.", "Bệnh kiết lị.", "Bệnh hắc lào, lang ben.", "Bệnh lao phổi."], "correct": "Bệnh hắc lào, lang ben."},
+          
+          // PHẦN 2: TRẮC NGHIỆM ĐÚNG/SAI (7 - 13)
+          {"type": "dung-sai", "question": "Câu 8: Nấm là sinh vật có khả năng tự dưỡng vì chúng có thể tự tổng hợp chất hữu cơ nhờ ánh sáng mặt trời.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 9: Nấm đảm là nhóm nấm có cơ quan sinh sản là đảm bào tử, ví dụ như nấm rơm, nấm hương.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 10: Đa số nguyên sinh vật là cơ thể đơn bào, nhân thực và có kích thước hiển vi.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 11: Bào tử nấm mốc rất nhẹ, dễ dàng phát tán trong không khí và có thể gây dị ứng đường hô hấp.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 12: Virus có cấu tạo tế bào nhân sơ giống như vi khuẩn.", "correct": "Sai"},
+          {"type": "dung-sai", "question": "Câu 13: Trong tự nhiên, vi khuẩn và nấm hoại sinh đóng vai trò quan trọng trong việc phân hủy xác sinh vật và chất thải hữu cơ, làm sạch môi trường.", "correct": "Đúng"},
+          {"type": "dung-sai", "question": "Câu 14: Nấm men được ứng dụng rộng rãi trong công nghiệp chế biến thực phẩm như sản xuất bánh mì, ủ bia, rượu vang.", "correct": "Đúng"},
+          
+          // PHẦN 3: TRẮC NGHIỆM ĐIỀN KHUYẾT (14 - 20)
+          {"type": "tra-loi-ngan", "question": "Câu 15: Nấm là những sinh vật nhân thực, cơ thể có thể là đơn bào hoặc đa bào, có lối sống ............................................ (lấy thức ăn là các chất hữu cơ có sẵn).", "correct": "dị dưỡng"},
+          {"type": "tra-loi-ngan", "question": "Câu 16: Khác với thực vật, thành tế bào của nấm được cấu tạo chủ yếu bằng chất .............................................", "correct": "kitin"},
+          {"type": "tra-loi-ngan", "question": "Câu 17: Vi khuẩn là nhóm sinh vật có cấu tạo tế bào ............................................, kích thước hiển vi.", "correct": "nhân sơ"},
+          {"type": "tra-loi-ngan", "question": "Câu 18: Virus chưa có cấu tạo tế bào, chúng sống ............................................ bắt buộc trong tế bào vật chủ.", "correct": "kí sinh nội bào"},
+          {"type": "tra-loi-ngan", "question": "Câu 19: Tảo lục thuộc giới Nguyên sinh có khả năng tự dưỡng (quang hợp) nhờ trong tế bào của chúng có chứa .............................................", "correct": "lục lạp"},
+          {"type": "tra-loi-ngan", "question": "Câu 20: Đa số các loại nấm trong tự nhiên sinh sản chủ yếu bằng .............................................", "correct": "bào tử"},
+          {"type": "tra-loi-ngan", "question": "Câu 21: Nấm độc thường có màu sắc sặc sỡ và có thêm 2 bộ phận đặc trưng mà nấm ăn thường không có, đó là vòng cuống nấm và .............................................", "correct": "bao gốc nấm"}
+        ];
+
+        // Quản lý trạng thái hệ thống
+        let studentName = "";
+        let currentSection = 1; 
+        let startTime;
+        let timerInterval;
+        
+        let scores = [0, 0, 0];
+        let times = [0, 0, 0];
+
+        function startQuiz() {
+            studentName = document.getElementById("studentName").value.trim();
+            if (!studentName) {
+                alert("Bạn vui lòng điền họ và tên để bắt đầu tính giờ làm bài nhé!");
+                return;
+            }
+
+            document.getElementById("login-screen").classList.add("hidden");
+            document.getElementById("display-name").innerText = "Thí sinh: " + studentName;
+            
+            loadSection(currentSection);
         }
 
-        .worksheet-container {
-            max-width: 850px;
-            margin: 20px auto;
-            padding: 30px;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            background: #ffffff;
+        function loadSection(sectionNum) {
+            // 1. Cập nhật giao diện tiêu đề phân cấp
+            document.getElementById("section-title").innerText = `PHẦN ${sectionNum}: ${sectionNum === 1 ? 'NHIỀU LỰA CHỌN' : (sectionNum === 2 ? 'ĐÚNG / SAI' : 'ĐIỀN KHUYẾT THÍCH HỢP')}`;
+            document.getElementById("btn-submit-text").innerText = `PHẦN ${sectionNum}`;
+
+            const container = document.getElementById("questions-container");
+            container.innerHTML = ""; 
+
+            // Phân bổ đúng vị trí index: Chặng 1 (0-6), Chặng 2 (7-13), Chặng 3 (14-20)
+            const startIndex = (sectionNum - 1) * 7;
+            const endIndex = sectionNum * 7;
+
+            let allHtml = ""; 
+
+            // 2. Vòng lặp khởi tạo HTML cho từng câu
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break;
+
+                let q = questions[i];
+                let html = `<div class="bg-gray-50 p-4 rounded shadow-sm border border-gray-200"><p class="font-bold mb-3 text-md text-gray-800">${q.question}</p>`;
+                
+                if (q.type === "trac-nghiem") {
+                    q.options.forEach(opt => {
+                        html += `<label class="block mb-2 cursor-pointer hover:bg-emerald-50 p-2 rounded transition flex items-center"><input type="radio" name="q${i}" value="${opt}" class="mr-2 w-4 h-4 text-emerald-600 focus:ring-emerald-500"> <span class="text-sm">${opt}</span></label>`;
+                    });
+                } else if (q.type === "tra-loi-ngan") {
+                    html += `<input type="text" id="q${i}" class="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 outline-none font-medium text-emerald-700" placeholder="Gõ câu trả lời của bạn vào đây...">`;
+                } else if (q.type === "dung-sai") {
+                    html += `<div class="flex gap-4 mt-2">`;
+                    html += `<label class="cursor-pointer hover:bg-green-50 px-4 py-2 border border-gray-200 rounded transition flex items-center"><input type="radio" name="q${i}" value="Đúng" class="mr-2 w-4 h-4 text-green-600"> <span class="font-bold text-green-700 text-sm">Đúng</span></label> `;
+                    html += `<label class="cursor-pointer hover:bg-red-50 px-4 py-2 border border-gray-200 rounded transition flex items-center"><input type="radio" name="q${i}" value="Sai" class="mr-2 w-4 h-4 text-red-600"> <span class="font-bold text-red-700 text-sm">Sai</span></label>`;
+                    html += `</div>`;
+                }
+                html += `</div>`;
+                allHtml += html;
+            }            
+
+            container.innerHTML = allHtml;
+
+            // 3. Render các thành phần mở rộng thông tin (nếu có) bằng MathJax
+            if (window.MathJax) {
+                MathJax.typesetClear([container]);
+                MathJax.typesetPromise([container]);
+            }
+
+            // 4. Quản lý trạng thái màn hình ẩn/hiện
+            document.getElementById("break-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            window.scrollTo(0, 0);
+
+            // 5. Khởi động bộ đếm thời gian thực cho chặng
+            if(timerInterval) clearInterval(timerInterval); 
+            document.getElementById("timer").innerText = "0";
+            startTime = Date.now();
+            
+            timerInterval = setInterval(() => {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer").innerText = elapsedTime;
+            }, 1000);
         }
 
-        /* Tiêu đề chính rực rỡ */
-        .header-title {
-            font-family: 'Quicksand', sans-serif;
-            text-align: center;
-            color: #0284c7; /* Xanh dương sáng */
-            font-size: 24px;
-            font-weight: 700;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        function submitSection() {
+            if (!confirm(`Bạn có chắc chắn muốn nộp bài của Phần ${currentSection} không? Hãy kiểm tra lại thật kĩ nhé!`)) return;
 
-        .subtitle {
-            text-align: center;
-            font-weight: 500;
-            color: #475569;
-            margin-bottom: 25px;
-        }
+            clearInterval(timerInterval);
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            times[currentSection - 1] = timeTaken;
 
-        /* Khung thông tin học sinh điền */
-        .student-info {
-            background-color: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 35px;
-            font-weight: 500;
-        }
+            // Tính điểm: Mỗi câu đúng được cộng 10 điểm (Tổng 70 điểm/phần)
+            let score = 0;
+            const startIndex = (currentSection - 1) * 7;
+            const endIndex = currentSection * 7;
 
-        /* Tiêu đề phần lớn */
-        .section-title {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 16px;
-            color: #ffffff;
-            background: linear-gradient(135deg, #0ea5e9, #2563eb);
-            padding: 8px 16px;
-            border-radius: 6px;
-            margin-top: 35px;
-            font-weight: 700;
-            display: inline-block;
-        }
+            for (let i = startIndex; i < endIndex; i++) {
+                if(!questions[i]) break;
+                let q = questions[i];
 
-        .section-title.answer-key {
-            background: linear-gradient(135deg, #10b981, #059669); /* Màu xanh lá cho đáp án */
-        }
+                if (q.type === "trac-nghiem" || q.type === "dung-sai") {
+                    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                    if (selected && selected.value.trim().toLowerCase() === q.correct.toLowerCase()) score += 10;
+                } else if (q.type === "tra-loi-ngan") {
+                    const answerInput = document.getElementById(`q${i}`);
+                    if(answerInput) {
+                        const answer = answerInput.value.trim().toLowerCase();
+                        // Chấp nhận so sánh tương đối (phục vụ đáp án linh hoạt lỗi chính tả nếu có)
+                        if (answer === q.correct.toLowerCase() || (q.correct.includes("chitin") && answer === "chitin") || (q.correct.includes("bao gốc") && answer === "bao gốc")) {
+                            score += 10;
+                        }
+                    }
+                }
+            }
+            scores[currentSection - 1] = score;
 
-        .guide-text {
-            font-style: italic;
-            color: #64748b;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
+            document.getElementById("quiz-screen").classList.add("hidden");
 
-        /* Định dạng câu hỏi */
-        .question-block {
-            margin-bottom: 20px;
-            padding: 10px;
-            border-bottom: 1px dashed #f1f5f9;
-        }
-
-        .question-text {
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        /* Grid hiển thị 4 lựa chọn A, B, C, D */
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            padding-left: 15px;
-        }
-
-        .option-item {
-            display: flex;
-            align-items: baseline;
-        }
-
-        /* Định dạng Trắc nghiệm Đúng / Sắp xếp hộp ô chọn */
-        .tf-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 10px;
-            border-bottom: 1px dashed #f1f5f9;
-        }
-
-        .tf-options {
-            display: flex;
-            gap: 20px;
-        }
-
-        .tf-checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .box-check {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #cbd5e1;
-            border-radius: 4px;
-            background-color: #f8fafc;
-            display: inline-block;
-        }
-
-        /* Định dạng bảng đáp án */
-        .answer-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            margin-bottom: 25px;
-        }
-
-        .answer-table th, .answer-table td {
-            border: 1px solid #cbd5e1;
-            padding: 10px;
-            text-align: left;
-        }
-
-        .answer-table th {
-            background-color: #f1f5f9;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-        }
-
-        .answer-table td strong {
-            color: #0284c7;
-        }
-
-        /* Nhấn mạnh phần khuyết điểm điền */
-        .fill-blank {
-            color: #dc2626;
-            font-weight: bold;
-        }
-
-        @media print {
-            body { padding: 0; }
-            .worksheet-container {
-                border: none;
-                box-shadow: none;
-                padding: 0;
+            if (currentSection < 3) {
+                document.getElementById("break-title").innerText = `Hệ thống ghi nhận kết quả Phần ${currentSection}!`;
+                document.getElementById("section-score").innerText = score;
+                document.getElementById("section-time").innerText = timeTaken;
+                document.getElementById("break-screen").classList.remove("hidden");
+            } else {
+                calculateFinalResult();
             }
         }
-    </style>
-</head>
-<body>
 
-<div class="worksheet-container">
-    
-    <div class="header-title">🎯 PHIẾU ĐÁNH GIÁ NĂNG LỰC KHTN 6 - BUỔI 4</div>
-    <div class="subtitle">Chuyên đề: Vi Khuẩn, Virus, Nguyên Sinh Vật và Giới Nấm (21 Câu hỏi)</div>
+        function nextSection() {
+            currentSection++; 
+            loadSection(currentSection);
+        }
 
-    <div class="student-info">
-        <div>Họ và tên học sinh: ........................................................</div>
-        <div>Lớp: ..................</div>
-    </div>
+        function calculateFinalResult() {
+            const totalScore = scores.reduce((a, b) => a + b, 0);
+            const totalTime = times.reduce((a, b) => a + b, 0);
 
-    <div class="section-title">PHẦN 1: TRẮC NGHIỆM NHIỀU LỰA CHỌN (7 CÂU)</div>
-    <div class="guide-text">Hướng dẫn: Khoanh tròn vào chữ cái đứng trước đáp án đúng nhất.</div>
+            document.getElementById("res-p1").innerText = `${scores[0]}/70 (${times[0]}s)`;
+            document.getElementById("res-p2").innerText = `${scores[1]}/70 (${times[1]}s)`;
+            document.getElementById("res-p3").innerText = `${scores[2]}/70 (${times[2]}s)`;
+            
+            document.getElementById("final-score").innerText = totalScore;
+            document.getElementById("final-time").innerText = totalTime;
 
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 1:</strong> Đặc điểm nào dưới đây là đặc điểm chung của giới Nấm?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Là sinh vật nhân sơ, sống tự dưỡng.</div>
-            <div class="option-item">B. Tế bào có chứa lục lạp để quang hợp.</div>
-            <div class="option-item">C. Là sinh vật nhân thực, sống dị dưỡng.</div>
-            <div class="option-item">D. Không có thành tế bào.</div>
-        </div>
-    </div>
+            document.getElementById("result-screen").classList.remove("hidden");
 
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 2:</strong> Trong các loại nấm sau, đại diện nào có cấu tạo cơ thể đơn bào?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Nấm rơm.</div>
-            <div class="option-item">B. Nấm men.</div>
-            <div class="option-item">C. Nấm hương.</div>
-            <div class="option-item">D. Nấm mộc nhĩ.</div>
-        </div>
-    </div>
+            // Gửi dữ liệu về hệ thống Apps Script lưu điểm
+            sendDataToSheet(studentName, totalScore, totalTime);
+        }
 
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 3:</strong> Thành phần cấu tạo nào sau đây thường có ở nấm độc mà <strong>KHÔNG CÓ</strong> ở nấm ăn được?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Mũ nấm và phiến nấm.</div>
-            <div class="option-item">B. Cuống nấm và sợi nấm.</div>
-            <div class="option-item">C. Vòng cuống nấm và bao gốc nấm.</div>
-            <div class="option-item">D. Thể quả và sợi nấm.</div>
-        </div>
-    </div>
+        function sendDataToSheet(name, totalScore, totalTime) {
+            const payload = {
+                action: "save_khtn_pizza",
+                hoTen: name,
+                diem: totalScore,
+                thoiGian: totalTime
+            };
 
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 4:</strong> Tế bào vi khuẩn khác với tế bào nhân thực ở điểm cơ bản nào?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Vi khuẩn chưa có màng nhân bao bọc vật chất di truyền (nhân sơ).</div>
-            <div class="option-item">B. Vi khuẩn có kích thước lớn hơn tế bào nhân thực.</div>
-            <div class="option-item">C. Vi khuẩn không có màng tế bào.</div>
-            <div class="option-item">D. Vi khuẩn có chứa lục lạp.</div>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 5:</strong> Nguyên sinh vật nào dưới đây có khả năng tự quang hợp do có chứa lục lạp?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Trùng giày.</div>
-            <div class="option-item">B. Trùng biến hình.</div>
-            <div class="option-item">C. Tảo lục đơn bào.</div>
-            <div class="option-item">D. Trùng kiết lị.</div>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 6:</strong> Vì sao Virus không được coi là một sinh vật hoàn chỉnh?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Vì chúng có kích thước quá nhỏ bé.</div>
-            <div class="option-item">B. Vì chúng chưa có cấu tạo tế bào, phải sống kí sinh nội bào bắt buộc.</div>
-            <div class="option-item">C. Vì chúng luôn gây bệnh cho con người.</div>
-            <div class="option-item">D. Vì vật chất di truyền của chúng chỉ có ARN.</div>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="question-text"><strong>Câu 7:</strong> Bệnh nào dưới đây là do nấm gây ra ở người?</div>
-        <div class="options-grid">
-            <div class="option-item">A. Bệnh sốt rét.</div>
-            <div class="option-item">B. Bệnh kiết lị.</div>
-            <div class="option-item">C. Bệnh hắc lào, lang ben.</div>
-            <div class="option-item">D. Bệnh lao phổi.</div>
-        </div>
-    </div>
-
-    <div class="section-title">PHẦN 2: TRẮC NGHIỆM ĐÚNG/SAI (7 CÂU)</div>
-    <div class="guide-text">Hướng dẫn: Đánh dấu [X] hoặc điền vào ô trống Đúng hoặc Sai cho các phát biểu sau.</div>
-
-    <div class="tf-container">
-        <span><strong>Câu 8:</strong> Nấm là sinh vật có khả năng tự dưỡng vì chúng có thể tự tổng hợp chất hữu cơ nhờ ánh sáng mặt trời.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-    <div class="tf-container">
-        <span><strong>Câu 9:</strong> Nấm đảm là nhóm nấm có cơ quan sinh sản là đảm bào tử, ví dụ như nấm rơm, nấm hương.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-    <div class="tf-container">
-        <span><strong>Câu 10:</strong> Đa số nguyên sinh vật là cơ thể đơn bào, nhân thực và có kích thước hiển vi.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-    <div class="tf-container">
-        <span><strong>Câu 11:</strong> Bào tử nấm mốc rất nhẹ, dễ dàng phát tán trong không khí và có thể gây dị ứng đường hô hấp.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-    <div class="tf-container">
-        <span><strong>Câu 12:</strong> Virus có cấu tạo tế bào nhân sơ giống như vi khuẩn.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-    <div class="tf-container">
-        <span><strong>Câu 13:</strong> Trong tự nhiên, vi khuẩn và nấm hoại sinh đóng vai trò quan trọng trong việc phân hủy xác sinh vật và chất thải hữu cơ, làm sạch môi trường.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-    <div class="tf-container">
-        <span><strong>Câu 14:</strong> Nấm men được ứng dụng rộng rãi trong công nghiệp chế biến thực phẩm như sản xuất bánh mì, ủ bia, rượu vang.</span>
-        <div class="tf-options">
-            <div class="tf-checkbox-label"><div class="box-check"></div> Đúng</div>
-            <div class="tf-checkbox-label"><div class="box-check"></div> Sai</div>
-        </div>
-    </div>
-
-    <div class="section-title">PHẦN 3: TRẮC NGHIỆM ĐIỀN KHUYẾT (7 CÂU)</div>
-    <div class="guide-text">Hướng dẫn: Chọn các từ/cụm từ thích hợp nhất điền vào chỗ trống để hoàn thành các câu sau.</div>
-
-    <div class="question-block">
-        <strong>Câu 15:</strong> Nấm là những sinh vật nhân thực, cơ thể có thể là đơn bào hoặc đa bào, có lối sống ............................................ (lấy thức ăn là các chất hữu cơ có sẵn).
-    </div>
-    <div class="question-block">
-        <strong>Câu 16:</strong> Khác với thực vật, thành tế bào của nấm được cấu tạo chủ yếu bằng chất .............................................
-    </div>
-    <div class="question-block">
-        <strong>Câu 17:</strong> Vi khuẩn là nhóm sinh vật có cấu tạo tế bào ............................................, kích thước hiển vi.
-    </div>
-    <div class="question-block">
-        <strong>Câu 18:</strong> Virus chưa có cấu tạo tế bào, chúng sống ............................................ bắt buộc trong tế bào vật chủ.
-    </div>
-    <div class="question-block">
-        <strong>Câu 19:</strong> Tảo lục thuộc giới Nguyên sinh có khả năng tự dưỡng (quang hợp) nhờ trong tế bào của chúng có chứa .............................................
-    </div>
-    <div class="question-block">
-        <strong>Câu 20:</strong> Đa số các loại nấm trong tự nhiên sinh sản chủ yếu bằng .............................................
-    </div>
-    <div class="question-block">
-        <strong>Câu 21:</strong> Nấm độc thường có màu sắc sặc sỡ và có thêm 2 bộ phận đặc trưng mà nấm ăn thường không có, đó là vòng cuống nấm và .............................................
-    </div>
-
-    <div class="section-title answer-key">🔑 ĐÁP ÁN (DÀNH CHO GIÁO VIÊN)</div>
-    <p class="guide-text">Tài liệu đáp án chính thức bám sát chương trình bài học phục vụ công tác chấm và chữa bài.</p>
-
-    <h3>Phần 1: Trắc nghiệm nhiều lựa chọn</h3>
-    <table class="answer-table">
-        <thead>
-            <tr>
-                <th style="width: 20%">Câu hỏi</th>
-                <th style="width: 25%">Đáp án đúng</th>
-                <th>Ghi chú / Kiến thức cốt lõi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>Câu 1</strong></td><td><strong>C</strong></td><td>Nấm là sinh vật nhân thực và dị dưỡng (do không có lục lạp).</td>
-            </tr>
-            <tr><td><strong>Câu 2</strong></td><td><strong>B</strong></td><td>Nấm men có cấu tạo đơn bào; các dòng nấm khác trong đáp án là đa bào.</td>
-            </tr>
-            <tr><td><strong>Câu 3</strong></td><td><strong>C</strong></td><td>Vòng cuống nấm và bao gốc nấm là dấu hiệu nhận biết nấm độc điển hình.</td>
-            </tr>
-            <tr><td><strong>Câu 4</strong></td><td><strong>A</strong></td><td>Vi khuẩn thuộc nhóm sinh vật nhân sơ (chưa có màng nhân hoàn chỉnh).</td>
-            </tr>
-            <tr><td><strong>Câu 5</strong></td><td><strong>C</strong></td><td>Tảo lục chứa cấu trúc bào quan lục lạp giúp thực hiện quá trình quang hợp.</td>
-            </tr>
-            <tr><td><strong>Câu 6</strong></td><td><strong>B</strong></td><td>Virus chỉ là dạng sống chứa vật chất di truyền và lớp vỏ protein (chưa có cấu tạo tế bào).</td>
-            </tr>
-            <tr><td><strong>Câu 7</strong></td><td><strong>C</strong></td><td>Hắc lào, lang ben là các bệnh da liễu phổ biến do nấm sợi kí sinh gây ra.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Phần 2: Trắc nghiệm Đúng/Sai</h3>
-    <table class="answer-table">
-        <thead>
-            <tr>
-                <th style="width: 20%">Câu hỏi</th>
-                <th style="width: 25%">Kết quả</th>
-                <th>Phân tích ngắn gọn lý do</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>Câu 8</strong></td><td><strong style="color: #dc2626;">Sai</strong></td><td>Nấm hoàn toàn không có lục lạp nên phải sống dị dưỡng (hoại sinh/kí sinh).</td></tr>
-            <tr><td><strong>Câu 9</strong></td><td><strong>Đúng</strong></td><td>Nấm rơm và nấm hương sinh sản bằng đảm bào tử, thuộc nhóm nấm đảm.</td></tr>
-            <tr><td><strong>Câu 10</strong></td><td><strong>Đúng</strong></td><td>Đúng đặc điểm phân loại cơ bản của giới Nguyên sinh vật.</td></tr>
-            <tr><td><strong>Câu 11</strong></td><td><strong>Đúng</strong></td><td>Bào tử nấm mốc lơ lửng rất dễ hít phải, có thể kích ứng hệ hô hấp.</td></tr>
-            <tr><td><strong>Câu 12</strong></td><td><strong style="color: #dc2626;">Sai</strong></td><td>Virus chưa có cấu tạo tế bào (chỉ là hạt virus), cấu trúc đơn giản hơn vi khuẩn.</td></tr>
-            <tr><td><strong>Câu 13</strong></td><td><strong>Đúng</strong></td><td>Đóng vai trò là sinh vật phân hủy chủ chốt trong các hệ sinh thái tự nhiên.</td></tr>
-            <tr><td><strong>Câu 14</strong></td><td><strong>Đúng</strong></td><td>Nấm men thực hiện lên men đường tạo CO₂ và alcohol ứng dụng làm bánh, rượu.</td></tr>
-        </tbody>
-    </table>
-
-    <h3>Phần 3: Trắc nghiệm Điền khuyết</h3>
-    <table class="answer-table">
-        <thead>
-            <tr>
-                <th style="width: 20%">Câu hỏi</th>
-                <th>Từ khóa / Cụm từ chính xác cần điền</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>Câu 15</strong></td><td><span class="fill-blank">dị dưỡng</span></td></tr>
-            <tr><td><strong>Câu 16</strong></td><td><span class="fill-blank">kitin</span> (hoặc chitin)</td></tr>
-            <tr><td><strong>Câu 17</strong></td><td><span class="fill-blank">nhân sơ</span></td></tr>
-            <tr><td><strong>Câu 18</strong></td><td><span class="fill-blank">kí sinh nội bào</span></td></tr>
-            <tr><td><strong>Câu 19</strong></td><td><span class="fill-blank">lục lạp</span></td></tr>
-            <tr><td><strong>Câu 20</strong></td><td><span class="fill-blank">bào tử</span></td></tr>
-            <tr><td><strong>Câu 21</strong></td><td><span class="fill-blank">bao gốc nấm</span> (hoặc bao gốc)</td></tr>
-        </tbody>
-    </table>
-
-</div>
-
+            fetch(GOOGLE_APP_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                document.getElementById("status-msg").innerHTML = "✅ Khóa dữ liệu thành công! Hãy đợi thầy tổng hợp danh sách nhận thưởng Pizza nhé!";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-green-600");
+            })
+            .catch(error => {
+                document.getElementById("status-msg").innerText = "❌ Lỗi kết nối đồng bộ! Em hãy chụp màn hình bảng điểm này và gửi trực tiếp cho thầy nhé!";
+                document.getElementById("status-msg").classList.replace("text-gray-700", "text-red-600");
+            });
+        }
+    </script>
 </body>
 </html>
