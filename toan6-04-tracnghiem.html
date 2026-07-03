@@ -1,1 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh Giá Năng Lực Toán 6 - Buổi 4</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&family=Roboto:wght=400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+    <style>
+        /* Thiết lập chung: Nền trắng, chữ đen chính */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .worksheet-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+        }
+
+        /* Tiêu đề chính rực rỡ */
+        .header-title {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            color: #0284c7; /* Xanh dương sáng */
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        /* Khung thông tin học sinh điền */
+        .student-info {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+
+        /* Tiêu đề phần lớn */
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-top: 35px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .section-title.answer-key {
+            background: linear-gradient(135deg, #10b981, #059669); /* Màu xanh lá cho đáp án */
+        }
+
+        .guide-text {
+            font-style: italic;
+            color: #64748b;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Định dạng câu hỏi */
+        .question-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        /* Grid hiển thị 4 lựa chọn A, B, C, D */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding-left: 15px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: baseline;
+        }
+
+        /* Định dạng Trắc nghiệm Đúng / Sai */
+        .tf-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            border-bottom: 1px dashed #f1f5f9;
+        }
+
+        .box-check {
+            width: 45px;
+            height: 30px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            background-color: #f8fafc;
+            display: inline-block;
+        }
+
+        /* Định dạng bảng đáp án */
+        .answer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .answer-table th, .answer-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .answer-table th {
+            background-color: #f1f5f9;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+
+        .answer-table td strong {
+            color: #d97706;
+        }
+
+        /* Hình ảnh minh họa */
+        .illustration {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: block;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        @media print {
+            body { padding: 0; }
+            .worksheet-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="worksheet-container">
+    
+    <div class="header-title">🎯 PHIẾU ĐÁNH GIÁ NĂNG LỰC TOÁN 6 - BUỔI 4</div>
+    <div class="subtitle">Chủ đề: Lũy thừa với số mũ tự nhiên & Thứ tự thực hiện phép tính (21 Câu hỏi)</div>
+
+    <div class="student-info">
+        <div>Họ và tên học sinh: ........................................................</div>
+        <div>Lớp: ..................</div>
+    </div>
+
+    <div class="section-title">PHẦN 1: TRẮC NGHIỆM NHIỀU LỰA CHỌN (7 CÂU)</div>
+    <div class="guide-text">Hướng dẫn: Khoanh tròn vào chữ cái trước câu trả lời đúng nhất.</div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 1:</strong> Thứ tự thực hiện các phép tính đối với biểu thức không có dấu ngoặc là gì?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Cộng và trừ $\rightarrow$ Nhân và chia $\rightarrow$ Lũy thừa.</div>
+            <div class="option-item">B. Lũy thừa $\rightarrow$ Nhân và chia $\rightarrow$ Cộng và trừ.</div>
+            <div class="option-item">C. Nhân và chia $\rightarrow$ Lũy thừa $\rightarrow$ Cộng và trừ.</div>
+            <div class="option-item">D. Tính tuỳ ý từ trái sang phải.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 2:</strong> Thứ tự thực hiện các phép tính đối với biểu thức có đầy đủ các dấu ngoặc là gì?</div>
+        <div class="options-grid">
+            <div class="option-item">A. $\{ \} \rightarrow [ ] \rightarrow ( )$</div>
+            <div class="option-item">B. $( ) \rightarrow \{ \} \rightarrow [ ]$</div>
+            <div class="option-item">C. $( ) \rightarrow [ ] \rightarrow \{ \}$</div>
+            <div class="option-item">D. $[ ] \rightarrow \{ \} \rightarrow ( )$</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 3:</strong> Trong biểu thức chỉ có phép tính nhân và chia, ta thực hiện phép tính như thế nào?</div>
+        <div class="options-grid">
+            <div class="option-item">A. Tính nhân trước, chia sau.</div>
+            <div class="option-item">B. Tính chia trước, nhân sau.</div>
+            <div class="option-item">C. Tính từ phải sang trái.</div>
+            <div class="option-item">D. Tính từ trái sang phải.</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 4:</strong> Kết quả của phép nhân hai lũy thừa $2^3 \cdot 2^2$ là:</div>
+        <div class="options-grid">
+            <div class="option-item">A. $4^5$</div>
+            <div class="option-item">B. $2^6$</div>
+            <div class="option-item">C. $2^5$</div>
+            <div class="option-item">D. $4^6$</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 5:</strong> Kết quả của phép tính $5 \cdot 2^2 - 18 : 3$ là:</div>
+        <div class="options-grid">
+            <div class="option-item">A. $14$</div>
+            <div class="option-item">B. $4$</div>
+            <div class="option-item">C. $34$</div>
+            <div class="option-item">D. $24$</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 6:</strong> Kết quả của phép tính $6 + 2 \cdot (3 + 2^2)$ là:</div>
+        <div class="options-grid">
+            <div class="option-item">A. $56$</div>
+            <div class="option-item">B. $20$</div>
+            <div class="option-item">C. $80$</div>
+            <div class="option-item">D. $200$</div>
+        </div>
+    </div>
+
+    <div class="question-block">
+        <div class="question-text"><strong>Câu 7:</strong> Giá trị của số tự nhiên $x$ thỏa mãn $3^x = 9$ là:</div>
+        <div class="options-grid">
+            <div class="option-item">A. $x = 2$</div>
+            <div class="option-item">B. $x = 3$</div>
+            <div class="option-item">C. $x = 4$</div>
+            <div class="option-item">D. $x = 6$</div>
+        </div>
+    </div>
+
+    <div class="section-title">PHẦN 2: TRẮC NGHIỆM ĐÚNG/SAI (7 CÂU)</div>
+    <div class="guide-text">Hướng dẫn: Điền chữ Đ (Đúng) hoặc S (Sai) vào ô trống bên phải.</div>
+
+    <div class="tf-container">
+        <span><strong>Câu 8:</strong> Lũy thừa $3^2$ có giá trị bằng $6$ (vì $3 \cdot 2 = 6$).</span>
+        <div class="box-check"></div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 9:</strong> Khi chia hai lũy thừa cùng cơ số (khác 0), ta giữ nguyên cơ số và trừ các số mũ cho nhau.</span>
+        <div class="box-check"></div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 10:</strong> $a^0 = 1$ (với điều kiện $a \neq 0$).</span>
+        <div class="box-check"></div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 11:</strong> Phép tính $5^7 : 5^2$ có kết quả là $5^5$.</span>
+        <div class="box-check"></div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 12:</strong> Trong biểu thức $100 : 5 \cdot 2$, ta bắt buộc phải lấy $5 \cdot 2 = 10$ trước, sau đó lấy $100 : 10$.</span>
+        <div class="box-check"></div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 13:</strong> Phép tính $2^3 \cdot 2^4 = 4^7$.</span>
+        <div class="box-check"></div>
+    </div>
+    <div class="tf-container">
+        <span><strong>Câu 14:</strong> Khi thực hiện phép tính $15 + 2 \cdot 3^2$, bước đầu tiên cần làm là tính giá trị của $3^2$.</span>
+        <div class="box-check"></div>
+    </div>
+
+    <div class="section-title">PHẦN 3: ĐIỀN KHUYẾT (7 CÂU)</div>
+    <div class="guide-text">Hướng dẫn: Điền từ, cụm từ hoặc con số thích hợp vào chỗ trống để được khẳng định đúng.</div>
+
+    <div class="question-block">
+        <strong>Câu 15:</strong> Trong lũy thừa $a^n$, $a$ được gọi là ......................... và $n$ được gọi là ..........................
+    </div>
+    <div class="question-block">
+        <strong>Câu 16:</strong> Khi nhân hai lũy thừa cùng cơ số, ta giữ nguyên cơ số và ......................... các số mũ.
+    </div>
+    <div class="question-block">
+        <strong>Câu 17:</strong> Lũy thừa bậc 2 của $a$ (kí hiệu là $a^2$) còn được gọi tên đặc biệt là $a$ ..........................
+    </div>
+    <div class="question-block">
+        <strong>Câu 18:</strong> Thứ tự thực hiện phép tính không có dấu ngoặc là: ......................... $\rightarrow$ Nhân và chia $\rightarrow$ Cộng và trừ.
+    </div>
+    <div class="question-block">
+        <strong>Câu 19:</strong> Giá trị của lũy thừa $2^4$ là ..........................
+    </div>
+    <div class="question-block">
+        <strong>Câu 20:</strong> Nếu biểu thức chỉ có phép cộng và phép trừ, ta thực hiện các phép tính theo thứ tự từ ......................... sang ..........................
+    </div>
+    <div class="question-block">
+        <strong>Câu 21:</strong> Hoàn thành các bước giải biểu thức sau: 
+        <br>
+        $30 - (5 - 2)^2 = 30 - (\dots \dots)^2 = 30 - \dots \dots = \dots \dots$.
+    </div>
+
+    <div class="section-title answer-key">🔑 BẢNG ĐÁP ÁN DÀNH CHO GIÁO VIÊN</div>
+    <p class="guide-text">Tài liệu lưu hành nội bộ - Hỗ trợ giáo viên chấm bài nhanh và phân tích lỗi sai cho học sinh.</p>
+
+    <h3>Phần 1: Trắc nghiệm nhiều lựa chọn</h3>
+    <table class="answer-table">
+        <thead>
+            <tr>
+                <th style="width: 15%">Câu hỏi</th>
+                <th style="width: 20%">Đáp án đúng</th>
+                <th>Phân tích ngắn / Hướng dẫn giải</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Câu 1</strong></td>
+                <td><strong>B</strong></td>
+                <td>Thứ tự ưu tiên chuẩn quy ước: Lũy thừa $\rightarrow$ Nhân chia $\rightarrow$ Cộng trừ.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 2</strong></td>
+                <td><strong>C</strong></td>
+                <td>Quy tắc bóc tách ngoặc từ trong ra ngoài: $( ) \rightarrow [ ] \rightarrow \{ \}$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 3</strong></td>
+                <td><strong>D</strong></td>
+                <td>Khi biểu thức chỉ có phép tính đồng cấp (nhân/chia), thực hiện nghiêm ngặt từ trái qua phải.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 4</strong></td>
+                <td><strong>C</strong></td>
+                <td>Nhân cùng cơ số: Giữ nguyên cơ số, cộng số mũ: $2^{3+2} = 2^5$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 5</strong></td>
+                <td><strong>A</strong></td>
+                <td>Tính lũy thừa trước: $5 \cdot 4 - 6 = 20 - 6 = 14$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 6</strong></td>
+                <td><strong>B</strong></td>
+                <td>Ưu tiên trong ngoặc tròn trước: $6 + 2 \cdot (3+4) = 6 + 2 \cdot 7 = 6 + 14 = 20$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 7</strong></td>
+                <td><strong>A</strong></td>
+                <td>Nhẩm giá trị lũy thừa cơ số 3: vì $3^2 = 9$ nên $x = 2$.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Phần 2: Trắc nghiệm Đúng/Sai</h3>
+    <table class="answer-table">
+        <thead>
+            <tr>
+                <th style="width: 15%">Câu hỏi</th>
+                <th style="width: 20%">Kết quả</th>
+                <th>Ghi chú lỗi sai kinh điển của học sinh</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Câu 8</strong></td>
+                <td><strong>S</strong></td>
+                <td>Sai lầm cực kì phổ biến: Học sinh hay lấy cơ số nhân với số mũ. Đúng phải là $3^2 = 3 \cdot 3 = 9$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 9</strong></td>
+                <td><strong>Đ</strong></td>
+                <td>Đúng theo quy tắc chia hai lũy thừa cùng cơ số tổng quát.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 10</strong></td>
+                <td><strong>Đ</strong></td>
+                <td>Đúng theo quy ước sách giáo khoa Toán 6.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 11</strong></td>
+                <td><strong>Đ</strong></td>
+                <td>Áp dụng chuẩn quy tắc trừ số mũ: $5^{7-2} = 5^5$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 12</strong></td>
+                <td><strong>S</strong></td>
+                <td>Lỗi thứ tự: Biểu thức chỉ chứa nhân/chia phải làm từ trái qua phải: $100 : 5 = 20 \rightarrow 20 \cdot 2 = 40$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 13</strong></td>
+                <td><strong>S</strong></td>
+                <td>Học sinh bị nhân cả cơ số. Quy tắc đúng là phải giữ nguyên cơ số 2: $2^7$.</td>
+            </tr>
+            <tr>
+                <td><strong>Câu 14</strong></td>
+                <td><strong>Đ</strong></td>
+                <td>Đúng chuẩn quy tắc: Phải ưu tiên tính toán giá trị lũy thừa trước các phép tính khác.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Phần 3: Điền khuyết</h3>
+    <table class="answer-table">
+        <thead>
+            <tr>
+                <th style="width: 15%">Câu hỏi</th>
+                <th>Từ / Cụm từ / Con số cần điền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Câu 15</strong></td>
+                <td><strong>cơ số</strong> / <strong>số mũ</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Câu 16</strong></td>
+                <td><strong>cộng</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Câu 17</strong></td>
+                <td><strong>bình phương</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Câu 18</strong></td>
+                <td><strong>Lũy thừa</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Câu 19</strong></td>
+                <td><strong>16</strong> <em style="color: #64748b;">(vì $2 \cdot 2 \cdot 2 \cdot 2 = 16$)</em></td>
+            </tr>
+            <tr>
+                <td><strong>Câu 20</strong></td>
+                <td><strong>trái</strong> / <strong>phải</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Câu 21</strong></td>
+                <td>Điền lần lượt các số: <strong>3</strong> / <strong>9</strong> / <strong>21</strong> <br><small style="color: #475569;">($30 - (3)^2 = 30 - 9 = 21$)</small></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
