@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="vi" data-color-mode="light" data-light-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÀI TẬP THỰC HÀNH BUỔI 1: MỆNH ĐỀ TOÁN HỌC</title>
+    
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/light-4fded0090af0ad58.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-primitives-b39ad27f3538ace3.css" />
+    <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-tailwind-compatible-b8351ad34be13af4.css" />
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background-color: #f6f8fa; }
+        .quiz-container { max-width: 850px; margin: 30px auto; background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .sticky-header { position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); z-index: 100; border-bottom: 2px solid #0969da; padding: 12px 0; backdrop-filter: blur(5px); }
+        .section-title { border-left: 4px solid #0969da; padding-left: 12px; margin-top: 30px; margin-bottom: 20px; font-weight: 600; color: #24292f; }
+        .question-box { background: #fafafa; border: 1px solid #e1e4e8; border-radius: 6px; padding: 16px; margin-bottom: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+        .option-item { display: flex; align-items: center; padding: 10px 14px; background: #fff; border: 1px solid #d0d7de; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+        .option-item:hover { background: #f3f4f6; }
+        .option-item input { margin-right: 12px; transform: scale(1.1); cursor: pointer; }
+        .matrix-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; }
+        .matrix-table th, .matrix-table td { padding: 10px; border: 1px solid #d0d7de; text-align: center; }
+        .matrix-table td:first-child { text-align: left; font-weight: 500; }
+        .input-short { width: 100%; max-width: 200px; padding: 6px 12px; border: 1px solid #d0d7de; border-radius: 6px; outline: none; }
+        .input-short:focus { border-color: #0969da; box-shadow: 0 0 0 3px rgba(9,105,218,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="sticky-header flex justify-between items-center px-2">
+        <div>
+            <h1 class="text-xl font-bold text-gray-900">TOÁN 10 - BUỔI 1</h1>
+            <p class="text-sm text-gray-500 m-0">BÀI TẬP THỰC HÀNH: MỆNH ĐỀ TOÁN HỌC</p>
+        </div>
+        <div class="text-right">
+            <span class="text-sm font-semibold text-gray-600 block">Thời gian còn lại</span>
+            <span id="countdown" class="text-2xl font-bold text-red-600">20:00</span>
+        </div>
+    </div>
+
+    <div class="flash-messages mt-4 p-4 color-bg-accent color-border-accent-emphasis border rounded-2">
+        <p class="font-semibold text-gray-800 mb-2">Chào các em!</p>
+        <p class="text-gray-700 mb-2">Rất vui được gặp lại các em trong buổi học hôm nay. Để giúp các em củng cố vững chắc lý thuyết về Mệnh đề toán học mà thầy trò mình vừa tìm hiểu, thầy đã biên soạn một bài kiểm tra nhỏ.</p>
+        <p class="text-gray-700 mb-2">Bài tập gồm 21 câu, chia làm 3 phần như kịch bản, bao quát từ khái niệm, mệnh đề chứa biến, phủ định, đến mệnh đề kéo theo và tương đương.</p>
+        <p class="text-sm text-amber-800 font-medium m-0">💡 <em>Ghi chú của thầy: Các em hãy bấm giờ đúng 20 phút để làm nhé! Việc rèn luyện áp lực thời gian với cấu trúc trắc nghiệm kết hợp đúng/sai và điền đáp án ngắn này sẽ giúp các em phản xạ cực kỳ bén khi bước vào năm học chính thức đấy. Làm xong, thầy sẽ đi vòng quanh kiểm tra và sửa những lỗi tư duy mà các em dễ mắc phải. Chúc các em làm bài thật tốt!</em></p>
+    </div>
+
+    <form id="quizForm">
+        <div class="mt-4 p-3 border rounded-2 bg-white flex flex-wrap gap-4">
+            <div class="flex-1 min-w-[200px]">
+                <label class="block text-sm font-semibold mb-1">Họ và tên học sinh:</label>
+                <input type="text" name="student_name" class="form-control width-full" required placeholder="Nhập đầy đủ họ tên...">
+            </div>
+            <div class="w-[150px]">
+                <label class="block text-sm font-semibold mb-1">Lớp:</label>
+                <input type="text" name="student_class" class="form-control width-full" required placeholder="Ví dụ: 10A1">
+            </div>
+        </div>
+
+        <h2 class="section-title text-lg">PHẦN 1: CÂU TRẮC NGHIỆM NHIỀU PHƯƠNG ÁN CHỌN (7 câu)</h2>
+        <p class="text-sm text-gray-500 mb-4 px-2"><em>Chọn một phương án đúng nhất cho mỗi câu sau:</em></p>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 1: Câu nào sau đây là mệnh đề toán học?</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q1" value="A"> <span>A. $x$ là số nguyên tố.</span></label>
+                <label class="option-item"><input type="radio" name="q1" value="B"> <span>B. Chủ nhật là ngày nghỉ.</span></label>
+                <label class="option-item"><input type="radio" name="q1" value="C"> <span>C. Hôm nay có tiết toán không?</span></label>
+                <label class="option-item"><input type="radio" name="q1" value="D"> <span>D. $3$ là số nguyên tố.</span></label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 2: Câu nào sau đây là mệnh đề chứa biến?</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q2" value="A"> <span>A. $x + y = 5$.</span></label>
+                <label class="option-item"><input type="radio" name="q2" value="B"> <span>B. $4$ là số chính phương.</span></label>
+                <label class="option-item"><input type="radio" name="q2" value="C"> <span>C. Học toán rất khó!</span></label>
+                <label class="option-item"><input type="radio" name="q2" value="D"> <span>D. Mệnh đề là gì?</span></label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 3: Phủ định của mệnh đề “$\exists x \in \mathbb{R}, 5x-3x^2=1$” là mệnh đề nào sau đây?</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q3" value="A"> <span>A. $\exists x \in \mathbb{R}, 5x-3x^2 \neq 1$.</span></label>
+                <label class="option-item"><input type="radio" name="q3" value="B"> <span>B. $\forall x \in \mathbb{R}, 5x-3x^2 \neq 1$.</span></label>
+                <label class="option-item"><input type="radio" name="q3" value="C"> <span>C. $\forall x \in \mathbb{R}, 5x-3x^2=1$.</span></label>
+                <label class="option-item"><input type="radio" name="q3" value="D"> <span>D. $\exists x \in \mathbb{R}, 5x-3x^2 \ge 1$.</span></label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 4: Cho mệnh đề $P \Rightarrow Q$ là mệnh đề đúng. Phát biểu nào sau đây không đúng?</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q4" value="A"> <span>A. $P$ là điều kiện đủ để có $Q$.</span></label>
+                <label class="option-item"><input type="radio" name="q4" value="B"> <span>B. Nếu $P$ thì $Q$.</span></label>
+                <label class="option-item"><input type="radio" name="q4" value="C"> <span>C. $P$ là điều kiện cần và đủ để có $Q$.</span></label>
+                <label class="option-item"><input type="radio" name="q4" value="D"> <span>D. $Q$ là điều kiện cần để có $P$.</span></label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 5: Cho mệnh đề: "Nếu một số nguyên chia hết cho 6 thì số nguyên đó chia hết cho 3". Trong các mệnh đề sau đây, đâu là mệnh đề đảo của mệnh đề trên?</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q5" value="A"> <span>A. "Nếu một số nguyên không chia hết cho 6 thì số nguyên đó không chia hết cho 3".</span></label>
+                <label class="option-item"><input type="radio" name="q5" value="B"> <span>B. "Nếu một số nguyên không chia hết cho 3 thì số nguyên đó chia hết cho 6".</span></label>
+                <label class="option-item"><input type="radio" name="q5" value="C"> <span>C. "Nếu một số nguyên chia hết cho 3 thì số nguyên đó chia hết cho 6".</span></label>
+                <label class="option-item"><input type="radio" name="q5" value="D"> <span>D. "Nếu một số nguyên chia hết cho 3 thì số nguyên đó không chia hết cho 6".</span></label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 6: Trong các mệnh đề sau, mệnh đề nào là phát biểu của mệnh đề tương đương $P \Leftrightarrow Q$?</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q6" value="A"> <span>A. Nếu một tam giác là tam giác cân thì tam giác đó có hai cạnh bằng nhau.</span></label>
+                <label class="option-item"><input type="radio" name="q6" value="B"> <span>B. Một tam giác là tam giác cân khi và chỉ khi nó có hai cạnh bằng nhau.</span></label>
+                <label class="option-item"><input type="radio" name="q6" value="C"> <span>C. Nếu tam giác có hai cạnh bằng nhau thì tam giác đó không là tam giác cân.</span></label>
+                <label class="option-item"><input type="radio" name="q6" value="D"> <span>D. Tam giác là tam giác cân nếu tam giác đó có hai cạnh bằng nhau.</span></label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="font-semibold text-gray-800">Câu 7: Mệnh đề phủ định của mệnh đề “Phương trình $x^2+3x+2=0$ có nghiệm” là:</p>
+            <div class="options-grid">
+                <label class="option-item"><input type="radio" name="q7" value="A"> <span>A. Phương trình $x^2+3x+2=0$ có nghiệm.</span></label>
+                <label class="option-item"><input type="radio" name="q7" value="B"> <span>B. Phương trình $x^2+3x+2=0$ có vô số nghiệm.</span></label>
+                <label class="option-item"><input type="radio" name="q7" value="C"> <span>C. Phương trình $x^2+3x+2=0$ có hai nghiệm phân biệt.</span></label>
+                <label class="option-item"><input type="radio" name="q7" value="D"> <span>D. Phương trình $x^2+3x+2=0$ vô nghiệm.</span></label>
+            </div>
+        </div>
+
+        <h2 class="section-title text-lg">PHẦN 2: CÂU TRẮC NGHIỆM ĐÚNG/SAI (7 câu)</h2>
+        <p class="text-sm text-gray-500 mb-4 px-2"><em>Xét tính đúng (Đ) hoặc sai (S) của 7 mệnh đề độc lập sau đây:</em></p>
+        
+        <div class="overflow-x-auto border border-gray-200 rounded-lg mb-6">
+            <table class="matrix-table text-sm">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th>Nội dung câu hỏi / Mệnh đề khảo sát</th>
+                        <th style="width: 100px;">Đúng (Đ)</th>
+                        <th style="width: 100px;">Sai (S)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Câu 8:</strong> Nếu $\pi < 3$ thì $\pi^2 < 9$.</td>
+                        <td><input type="radio" name="q8" value="Đ"></td>
+                        <td><input type="radio" name="q8" value="S"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Câu 9:</strong> Nếu $a$ chia hết cho $9$ thì $a$ chia hết cho $3$.</td>
+                        <td><input type="radio" name="q9" value="Đ"></td>
+                        <td><input type="radio" name="q9" value="S"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Câu 10:</strong> Nếu một tam giác có một góc bằng $60^\circ$ thì tam giác đó là tam giác đều.</td>
+                        <td><input type="radio" name="q10" value="Đ"></td>
+                        <td><input type="radio" name="q10" value="S"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Câu 11:</strong> Nếu hai số $a$ và $b$ cùng chia hết cho $c$ thì $a+b$ chia hết cho $c$.</td>
+                        <td><input type="radio" name="q11" value="Đ"></td>
+                        <td><input type="radio" name="q11" value="S"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Câu 12:</strong> Mệnh đề $P$: "$\sqrt{2}$ là số chính phương" có mệnh đề phủ định là $\overline{P}$: "$\sqrt{2}$ không là số chính phương".</td>
+                        <td><input type="radio" name="q12" value="Đ"></td>
+                        <td><input type="radio" name="q12" value="S"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Câu 13:</strong> $6$ không là số nguyên tố.</td>
+                        <td><input type="radio" name="q13" value="Đ"></td>
+                        <td><input type="radio" name="q13" value="S"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Câu 14:</strong> $\sqrt{2}$ là số hữu tỉ.</td>
+                        <td><input type="radio" name="q14" value="Đ"></td>
+                        <td><input type="radio" name="q14" value="S"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="section-title text-lg">PHẦN 3: CÂU TRẢ LỜI NGẮN (7 câu)</h2>
+        <p class="text-sm text-gray-500 mb-4 px-2"><em>Đọc kỹ đề bài và chỉ ghi đáp án cuối cùng (là một số cụ thể) vào ô trống:</em></p>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 m-0">Câu 15: Có bao nhiêu số nguyên $x$ để mệnh đề chứa biến $P(x): "x^2-5x+4=0"$ là mệnh đề đúng?</p>
+            </div>
+            <div>
+                <input type="text" name="q15" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 m-0">Câu 16: Cho mệnh đề chứa biến $P(x): "x^2 - 5x + 6 = 0"$. Gọi $S$ là tập hợp tất cả các số tự nhiên $x$ làm cho mệnh đề $P(x)$ đúng. Tính tổng tất cả các phần tử của tập hợp $S$.</p>
+            </div>
+            <div>
+                <input type="text" name="q16" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 mb-2">Câu 17: Có bao nhiêu mệnh đề đúng trong các mệnh đề sau?</p>
+                <p class="text-gray-700 m-0 pl-3">▫️ “Phương trình $x^2-3x+2=0$ có nghiệm nguyên”.</p>
+                <p class="text-gray-700 m-0 pl-3">▫️ “Có duy nhất một số nguyên tố chẵn”.</p>
+                <p class="text-gray-700 m-0 pl-3">▫️ “$\forall x \in \mathbb{R}, x^2+1 > 0$”.</p>
+            </div>
+            <div class="mt-2 sm:mt-0">
+                <input type="text" name="q17" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 mb-2">Câu 18: Có bao nhiêu mệnh đề đúng trong các câu dưới đây?</p>
+                <p class="text-gray-700 m-0 pl-3">a) $\sqrt{2}$ là số lẻ.</p>
+                <p class="text-gray-700 m-0 pl-3">b) Tích của hai số lẻ là một số lẻ.</p>
+                <p class="text-gray-700 m-0 pl-3">c) Có một số thực mà bình phương là số âm.</p>
+                <p class="text-gray-700 m-0 pl-3">d) Mọi số nguyên dương đều có bình phương lớn hơn hoặc bằng $1$.</p>
+            </div>
+            <div class="mt-2 sm:mt-0">
+                <input type="text" name="q18" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 m-0">Câu 19: Cho mệnh đề $P$: “Bình phương của một số thực lớn hơn $0$”. Hỏi có bao nhiêu số nguyên thỏa mãn mệnh đề phủ định của mệnh đề $P$?</p>
+            </div>
+            <div>
+                <input type="text" name="q19" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 m-0">Câu 20: Tính số mệnh đề đúng trong các mệnh đề sau: $2^3 = 8$; $3 < 2$; $15$ chia hết cho $3$.</p>
+            </div>
+            <div>
+                <input type="text" name="q20" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="question-box flex justify-between items-start flex-col sm:flex-row gap-3">
+            <div class="flex-1">
+                <p class="font-semibold text-gray-800 mb-2">Câu 21: Có bao nhiêu mệnh đề trong các mệnh đề sau mà mệnh đề đảo của nó là mệnh đề đúng?</p>
+                <p class="text-gray-700 m-0 pl-3">A. Nếu $a$ và $b$ cùng chia hết cho $c$ thì $a+b$ chia hết cho $c$.</p>
+                <p class="text-gray-700 m-0 pl-3">B. Nếu $a > b$ thì $a^2 > b^2$.</p>
+                <p class="text-gray-700 m-0 pl-3">C. Nếu số nguyên chia hết cho $14$ thì chia hết cho cả $2$ và $7$.</p>
+                <p class="text-gray-700 m-0 pl-3">D. Hai tam giác bằng nhau có diện tích bằng nhau.</p>
+            </div>
+            <div class="mt-2 sm:mt-0">
+                <input type="text" name="q21" class="input-short" placeholder="Đáp số...">
+            </div>
+        </div>
+
+        <div class="mt-6 text-center">
+            <button type="submit" id="submitBtn" class="btn btn-primary px-5 py-2 font-bold text-lg">Nộp Bài Kiểm Tra</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const DURATION_MINUTES = 20;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec";
+    
+    let timeRemaining = DURATION_MINUTES * 60;
+    const countdownEl = document.getElementById('countdown');
+    let isSubmitting = false;
+
+    // 1. Quản lý đồng hồ đếm ngược
+    const timer = setInterval(() => {
+        if (timeRemaining <= 0) {
+            clearInterval(timer);
+            countdownEl.textContent = "00:00";
+            alert("Đã hết 20 phút làm bài! Hệ thống tự động thu bài của em.");
+            autoSubmitQuiz();
+        } else {
+            timeRemaining--;
+            let mins = Math.floor(timeRemaining / 60);
+            let secs = timeRemaining % 60;
+            countdownEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+
+    // 2. Thu bài chủ động khi click button nộp bài
+    document.getElementById('quizForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (confirm("Em có chắc chắn muốn nộp bài làm lên hệ thống?")) {
+            submitQuizData();
+        }
+    });
+
+    function autoSubmitQuiz() {
+        submitQuizData();
+    }
+
+    // 3. Đóng gói dữ liệu động gửi lên Google Sheet thông qua Apps Script URL
+    function submitQuizData() {
+        if (isSubmitting) return;
+        isSubmitting = true;
+        
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Đang gửi dữ liệu...";
+
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+        
+        // Chuyển cấu trúc form data sang JSON object
+        const payload = {};
+        formData.forEach((value, key) => {
+            payload[key] = value;
+        });
+        
+        // Bổ sung siêu dữ liệu thời gian làm bài thực tế của học sinh
+        payload['submitted_at'] = new Date().toLocaleString('vi-VN');
+        payload['time_spent_seconds'] = (DURATION_MINUTES * 60) - timeRemaining;
+
+        // Fetch API sử dụng chế độ no-cors để tích hợp tối ưu với Web App Google Apps Script
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            clearInterval(timer);
+            alert("Nộp bài thành công! Thầy chúc mừng em đã hoàn thành xong bài thực hành Mệnh đề toán học.");
+            submitBtn.textContent = "Đã Nộp Bài Thành Công";
+            // Khóa toàn bộ các ô nhập dữ liệu của form sau khi hoàn thành nộp bài
+            const allInputs = form.querySelectorAll('input, button');
+            allInputs.forEach(input => input.disabled = true);
+        })
+        .catch(error => {
+            console.error('Lỗi khi nộp bài:', error);
+            alert("Đã có lỗi xảy ra khi truyền dữ liệu. Em vui lòng kiểm tra kết nối mạng và báo lại với thầy!");
+            isSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Nộp Bài Kiểm Tra";
+        });
+    }
+</script>
+
+</body>
+</html>
