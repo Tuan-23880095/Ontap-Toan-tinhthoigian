@@ -6,575 +6,155 @@
     <title>Hệ Thống Học Tập Trực Tuyến - E-Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hiệu ứng nhấp nháy cho bài đang mở */
+        .pulse-ring { animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
+    <!-- HEADER GIAO DIỆN -->
     <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-amber-500 p-2 rounded-lg text-xl">🎓</div>
+                <div class="bg-amber-500 w-10 h-10 flex items-center justify-center rounded-lg text-xl shadow-inner">
+                    <i class="fas fa-graduation-cap text-white"></i>
+                </div>
                 <div>
                     <h1 class="text-lg font-bold tracking-wide uppercase text-amber-400">E-Academy</h1>
-                    <p class="text-xs text-slate-400">Học Chủ Động - Bứt Phá Điểm Số</p>
+                    <p class="text-xs text-slate-400 font-medium">Học Chủ Động - Bứt Phá Điểm Số</p>
                 </div>
             </div>
-            <span class="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300 font-medium">Hệ Thống Giảng Dạy 2026</span>
+            <div class="text-right hidden sm:block">
+                <span class="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-full text-slate-300">
+                    <i class="fas fa-user-circle mr-1"></i> Không gian học tập THCS & THPT
+                </span>
+            </div>
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
-        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 md:p-8 text-white mb-8 shadow-lg relative overflow-hidden">
-            <div class="relative z-10 max-w-2xl">
-                <span class="bg-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-indigo-500/20">Bảng điều khiển học sinh</span>
-                <h2 class="text-2xl md:text-3xl font-extrabold mt-3 mb-2">Chào mừng bạn đến với Không Gian Học Tập Lớp Chất Lượng Cao</h2>
-                <p class="text-slate-300 text-sm">Vui lòng chọn khối lớp đang theo học, sau đó chọn đúng buổi học tương ứng để vào phòng học lý thuyết, làm bài tập và tham gia Đấu trường Pizza.</p>
-            </div>
-            <div class="absolute right-0 bottom-0 top-0 opacity-10 text-[10rem] select-none pointer-events-none flex items-center pr-10">📐</div>
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
+        
+        <!-- Tabs Bộ lọc -->
+        <div class="flex space-x-2 mb-8 overflow-x-auto pb-2" id="filter-tabs">
+            <button class="px-5 py-2 rounded-full bg-slate-800 text-white text-sm font-semibold shadow">Tất cả</button>
+            <button class="px-5 py-2 rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 text-sm font-semibold transition">Toán Lớp 6</button>
+            <button class="px-5 py-2 rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 text-sm font-semibold transition">Toán Lớp 7</button>
+            <button class="px-5 py-2 rounded-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 text-sm font-semibold transition">Toán Lớp 10</button>
         </div>
 
-        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center"><span class="w-1 h-6 bg-indigo-600 rounded mr-2"></span>Chương trình học các khối lớp</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<!-- KHỐI LỚP 6-->            
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <div class="flex items-center space-x-3 mb-4 border-b pb-3">
-                    <span class="text-2xl bg-blue-50 p-2 rounded-lg text-blue-600">🧮</span>
-                    <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Toán Học 6</h4>
-                </div>
-                 <!--bắt đầu 1 buổi-->
-                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 4: Lũy thừa với số mũ tự nhiên & Thứ tự thực hiện phép tính</span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan6-04-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan6-04-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan6-04-tracnghiem.html" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
-               
-                <!--//Kết thúc 1 buổi-->
-                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 5:  QUAN HỆ CHIA HẾT VÀ DẤU HIỆU CHIA HẾT</span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan6-05-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan6-05-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan6-05-tracnghiem.html" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
-               
-                <!--//Kết thúc 1 buổi-->
-                 <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 6: Số nguyên tố. Hợp số. Phân tích ra thừa số nguyên tố.</span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan6-06-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan6-06-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="https://tuan-23880095.github.io/khtn-math-web/?id=toan6-06" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
+        <div id="lessons-container" class="space-y-4">
+            <!-- Dữ liệu sẽ được Javascript đổ vào đây tự động -->
+        </div>
 
-                  <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 7: Ước chung và Ước chung lớn nhất (ƯCLN)..</span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan6-07-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan6-07-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="https://tuan-23880095.github.io/khtn-math-web/?id=toan6-07" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-<!--LỚP 6-KHOA HỌC TỰ NHIÊN-->
-            
-              <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                    <div class="flex items-center space-x-3 mb-4 border-b pb-3">
-                        <span class="text-2xl bg-emerald-50 p-2 rounded-lg text-emerald-600">🧪</span>
-                        <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Khoa Học Tự Nhiên 6</h4>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <a href="khtn6-01.html" class="flex justify-between items-center p-3 rounded-lg border border-slate-100 hover:border-emerald-500 hover:bg-emerald-50/30 transition text-sm font-medium">
-                            <span>Buổi 1: Giới thiệu về các dụng cụ đo thể tích</span>
-                            <span class="text-xs text-emerald-600">Vào học &rarr;</span>
-                        </a>
-            
-                    <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm relative">
-                        <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                            <span>🗓️ Buổi 4: KHTN 6 - Đo khối lượng & Đo nhiệt độ</span>
-                            <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                        </div>
-                        
-                        <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                            <a href="khtn6-04-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                    📘 Phần A: Bài học lý thuyết trọng tâm
-                                </span>
-                                <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                            </a>
-                    
-                            <a href="khtn6-04-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                    ✍️ Phần B: Phiếu bài tập tự luyện
-                                </span>
-                                <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                            </a>
-                    
-                            <a href="https://tuan-23880095.github.io/TracNghiemOnline/?id=khtn6-04" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                    🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                                </span>
-                                <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                            </a>
-                        </div>
-                    </div>  
-                    <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm relative">
-                        <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                            <span>🗓️ Buổi 5: Sự Đa Dạng và Các Thể Của Chất</span>
-                            <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                        </div>
-                        
-                        <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                            <a href="khtn6-05-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                    📘 Phần A: Bài học lý thuyết trọng tâm
-                                </span>
-                                <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                            </a>
-                    
-                            <a href="khtn6-05-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                    ✍️ Phần B: Phiếu bài tập tự luyện
-                                </span>
-                                <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                            </a>
-                    
-                            <a href="https://tuan-23880095.github.io/TracNghiemOnline/?id=khtn6-05" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                    🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                                </span>
-                                <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm relative">
-                        <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                            <span>🗓️Buổi 6: Sự chuyển thể của chất.</span>
-                            <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                        </div>
-                        
-                        <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                            <a href="khtn6-06-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                    📘 Phần A: Bài học lý thuyết trọng tâm
-                                </span>
-                                <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                            </a>
-                    
-                            <a href="khtn6-06-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                    ✍️ Phần B: Phiếu bài tập tự luyện
-                                </span>
-                                <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                            </a>
-                    
-                            <a href="https://tuan-23880095.github.io/TracNghiemOnline/?id=khtn6-06" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                                <span class="flex items-center">
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                    <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                    🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                                </span>
-                                <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                            </a>
-                        </div>
-                    </div>  
-                        
-                </div>
-                  
-              </div>
-                  
-<!--KHỐI LỚP 7 - TOÁN-->
-            <div class="bg-white rounded-xl shadow-sm border border-indigo-200 p-6 ring-2 ring-indigo-600/5">
-                <div class="flex justify-between items-center mb-4 border-b pb-3">
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl bg-indigo-50 p-2 rounded-lg text-indigo-600">🍕</span>
-                        <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Toán Học 7</h4>
-                    </div>
-                    <span class="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">ĐANG HOẠT ĐỘNG</span>
-                </div>
-
-                <!--bắt đầu 1 buổi-->
-                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 4:  Thứ tự thực hiện phép tính, quy tắc dấu ngoặc và quy tắc chuyển vế </span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan7-04-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan7-04-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan7-04-tracnghiem.html" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
-                <!--//Kết thúc 1 buổi-->
-                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 5: Luyện tập tổng hợp và giải toán có lời văn</span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan7-05-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan7-05-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="https://tuan-23880095.github.io/khtn-math-web/?id=toan7-05" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
-                <!--kết thúc buổi 5-->
-                <!--bắt đầu 1 buổi 6-->
-                <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                        <span>🗓️ Buổi 6: Số thập phân vô hạn tuần hoàn & Làm tròn số</span>
-                        <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                    </div>
-                    
-                    <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                        <a href="toan7-06-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                                📘 Phần A: Bài học lý thuyết trọng tâm
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                        </a>
-                
-                        <a href="toan7-06-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                                ✍️ Phần B: Phiếu bài tập tự luyện
-                            </span>
-                            <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                        </a>
-                
-                        <a href="https://tuan-23880095.github.io/khtn-math-web/?id=toan7-05" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                            <span class="flex items-center">
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                                <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                                🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                            </span>
-                            <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                        </a>
-                    </div>
-                </div>
-                <!--kết thúc buổi 5-->
-            </div>
-          <!--  // kết thúc khối lớp buổi-->
-
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <div class="flex items-center space-x-3 mb-4 border-b pb-3">
-                    <span class="text-2xl bg-purple-50 p-2 rounded-lg text-purple-600">📐</span>
-                    <h4 class="font-extrabold text-lg text-slate-900">Khối Lớp: Toán Học 10</h4>
-                </div>
-          <!--BẮT ĐẦU BUỔI 1-->  
-            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                    <span>🗓️ Buổi 1: Tập hợp và các phép toán (33 câu hỏi)</span>
-                    <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                </div>
-                
-                <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                    <a href="toan10-01-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                            📘 Phần A: Bài học lý thuyết trọng tâm
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                    </a>
-            
-                    <a href="toan10-01-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                            ✍️ Phần B: Phiếu bài tập tự luyện
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                    </a>
-            
-                    <a href="toan10-01-tracnghiem.html" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                            🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                        </span>
-                        <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                    </a>
-                </div> 
-            </div><!--KẾT THÚC BUỔI-->
-   
-            <div></div>
-                <!--BẮT ĐẦU BUỔI 2-->     
-            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                    <span>🗓️ Buổi 2: Mệnh đề chứa kí hiệu ∀,∃. Khái niệm tập hợp</span>
-                    <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                </div>
-                
-                <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                    <a href="toan10-02-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                            📘 Phần A: Bài học lý thuyết trọng tâm
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                    </a>
-            
-                    <a href="toan10-02-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                            ✍️ Phần B: Phiếu bài tập tự luyện
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                    </a>
-            
-                    <a href="toan10-02-tracnghiem.html" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                            🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                        </span>
-                        <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                    </a>
-                </div> 
-            </div><!--KẾT THÚC BUỔI 2-->
-                    <!--BẮT ĐẦU BUỔI 3-->     
-            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                    <span>🗓️ Buổi 3: Các phép toán trên tập hợp. Phép giao, phép hợp, phép hiệu và phần bù. Biểu diễn bằng biểu đồ Ven</span>
-                    <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                </div>
-                
-                <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-                    <a href="toan10-03-lythuyet.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                            📘 Phần A: Bài học lý thuyết trọng tâm
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                    </a>
-            
-                    <a href="toan10-03-baitap.html" class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                            ✍️ Phần B: Phiếu bài tập tự luyện
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                    </a>
-            
-                    <a href="https://tuan-23880095.github.io/TracNghiemOnline/?id=toan10-03" class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                            🍕 Phần C: Đấu trường trắc nghiệm Pizza
-                        </span>
-                        <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">Tính giờ</span>
-                    </a>
-                </div> 
-            </div><!--KẾT THÚC BUỔI 3-->
-            <!-- Bắt đầu 1 buổi -->
-            <div class="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
-                <div class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 mb-3 flex justify-between items-center">
-                    <span>🗓️ Buổi 4: Các tập hợp số. Các khoảng, nửa khoảng, đoạn trên trục số và các phép toán giao, hợp, hiệu trên các tập hợp số thực</span>
-                    <span class="text-[11px] text-slate-400 font-normal">3 nội dung</span>
-                </div>
-            
-                <div class="relative pl-4 border-l-2 border-slate-200 space-y-3 ml-2">
-            
-                    <a href="toan10-04-lythuyet.html"
-                       class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-blue-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-blue-500 transition"></span>
-                            📘 Phần A: Bài học lý thuyết trọng tâm
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-blue-500">&rarr;</span>
-                    </a>
-            
-                    <a href="toan10-04-baitap.html"
-                       class="group flex items-center justify-between text-xs font-medium text-slate-600 hover:text-emerald-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition"></span>
-                            ✍️ Phần B: Phiếu bài tập tự luyện
-                        </span>
-                        <span class="opacity-0 group-hover:opacity-100 transition text-emerald-500">&rarr;</span>
-                    </a>
-            
-                    <a href="https://tuan-23880095.github.io/TracNghiemOnline/?id=toan10-04"
-                       class="group flex items-center justify-between text-xs font-bold text-slate-700 hover:text-orange-600 transition">
-                        <span class="flex items-center">
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-400 pulse animate-ping"></span>
-                            <span class="absolute -left-[21px] w-2 h-2 rounded-full bg-orange-500"></span>
-                            🏆 Phần C: Đấu trường trắc nghiệm Pizza
-                        </span>
-                        <span class="text-orange-500 text-[10px] bg-orange-50 px-1.5 py-0.5 rounded border border-orange-200">
-                            Tính giờ
-                        </span>
-                    </a>
-            
-                </div>
-            </div>
-            <!-- Kết thúc 1 buổi -->
-        </div> <!--KẾT THÚC LỚP-->
-        
-        </div> <!--KẾT THÚC BODY-->
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
-        <p>&copy; 2026 Hệ thống quản lý học tập trực tuyến E-Academy. Bản quyền thuộc ThS.Đinh Quốc Tuấn - mọi hoạt động phục vụ cho giảng dạy, giáo dục, phi lợi nhuận.</p>
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+        <p>&copy; 2026 Hệ thống quản lý học tập trực tuyến E-Academy. Bản quyền thuộc ThS.Đinh Quốc Tuấn.</p>
     </footer>
 
+    <!-- SCRIPT TINH GỌN GIAO DIỆN TỰ ĐỘNG -->
+    <script>
+        // 1. Cấu trúc dữ liệu mô phỏng (Sau này thầy lấy từ Google Sheets api.js bỏ vào đây)
+        const lessonsData = [
+            {
+                id: "toan6-04",
+                grade: "Toán 6",
+                title: "Thứ tự thực hiện phép tính",
+                desc: "Quy tắc thực hiện phép tính, biểu thức có ngoặc và không có ngoặc.",
+                isOpen: true
+            },
+            {
+                id: "toan6-05",
+                grade: "Toán 6",
+                title: "Quan hệ chia hết và dấu hiệu chia hết",
+                desc: "Tìm hiểu các dấu hiệu chia hết cho 2, 3, 5, 9 và tính chất chia hết của một tổng.",
+                isOpen: true
+            },
+            {
+                id: "toan7-01",
+                grade: "Toán 7",
+                title: "Tập hợp các số hữu tỉ",
+                desc: "Khái niệm số hữu tỉ, biểu diễn trên trục số và so sánh hai số hữu tỉ.",
+                isOpen: false
+            },
+            {
+                id: "toan10-02",
+                grade: "Toán 10",
+                title: "Tập hợp và các phép toán",
+                desc: "Giao, hợp, hiệu của hai tập hợp. Biểu diễn bằng biểu đồ Ven.",
+                isOpen: true
+            }
+        ];
+
+        // 2. Thuật toán Render giao diện dạng "Thẻ thông minh"
+        function renderLessons() {
+            const container = document.getElementById("lessons-container");
+            container.innerHTML = "";
+
+            lessonsData.forEach(lesson => {
+                const card = document.createElement("div");
+                
+                // Nếu bài đang khóa thì làm mờ
+                const opacityClass = lesson.isOpen ? "opacity-100" : "opacity-60 grayscale-[30%] pointer-events-none";
+                const statusDot = lesson.isOpen 
+                    ? `<span class="relative flex h-2.5 w-2.5 mr-2"><span class="pulse-ring absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span></span>`
+                    : `<span class="relative flex h-2.5 w-2.5 mr-2"><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-slate-300"></span></span>`;
+
+                card.className = `bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4 ${opacityClass}`;
+
+                card.innerHTML = `
+                    <!-- Phân trái: Thông tin bài học -->
+                    <div class="flex-grow">
+                        <div class="flex items-center mb-1">
+                            ${statusDot}
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 mr-2">${lesson.id}</span>
+                            <span class="text-xs font-semibold text-amber-600">${lesson.grade}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-800 leading-tight">${lesson.title}</h3>
+                        <p class="text-xs text-slate-500 mt-1 line-clamp-1">${lesson.desc}</p>
+                    </div>
+
+                    <!-- Phần phải: 3 Nút tác vụ tinh gọn -->
+                    <div class="flex flex-wrap md:flex-nowrap gap-2 md:w-auto w-full border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
+                        
+                        <!-- Nút Lý Thuyết -->
+                        <button onclick="openDocument('${lesson.id}', 'lythuyet')" class="flex-1 md:flex-none flex items-center justify-center space-x-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-xs font-semibold transition">
+                            <i class="fas fa-book-open"></i> <span>Lý thuyết</span>
+                        </button>
+
+                        <!-- Nút Bài Tập -->
+                        <button onclick="openDocument('${lesson.id}', 'baitap')" class="flex-1 md:flex-none flex items-center justify-center space-x-1.5 px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-semibold transition">
+                            <i class="fas fa-edit"></i> <span>Bài tập</span>
+                        </button>
+
+                        <!-- Nút Trắc Nghiệm Online (Dẫn ra ngoài) -->
+                        <a href="https://tuan-23880095.github.io/TracNghiemOnline/?id=${lesson.id}" target="_blank" class="w-full md:w-auto flex items-center justify-center space-x-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white shadow-sm rounded-lg text-xs font-semibold transition group">
+                            <i class="fas fa-stopwatch text-amber-400"></i> 
+                            <span>Trắc nghiệm</span>
+                            <i class="fas fa-external-link-alt text-[9px] text-slate-400 group-hover:text-white ml-1"></i>
+                        </a>
+
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Hàm xử lý mở tài liệu (Thầy có thể kết nối với Modal cũ ở đây)
+        function openDocument(lessonId, type) {
+            // Thay vì mở file vật lý, sau này thầy có thể mở Modal iframe
+            const url = `data/${lessonId}-${type}.html`;
+            alert(`Sẽ mở Modal nạp nội dung từ: ${url}`);
+        }
+
+        // Chạy hàm khi tải trang
+        document.addEventListener('DOMContentLoaded', renderLessons);
+
+    </script>
 </body>
 </html>
